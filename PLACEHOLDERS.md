@@ -31,64 +31,30 @@ These are stated on the site as fact, based on your answers. Please double-check
 - [ ] **GDPR-compliant, with a data processing agreement as part of client contracts** (Pricing FAQ)
 - [ ] **"The people who build your system support it"** (About, How it works)
 
-## 4. How it works (`src/content/process.ts`, `src/app/how-it-works/page.tsx`)
+## 4. How it works (`src/content/process.ts`)
 
-- [ ] Step 1 timeline: `[X] days`
-- [ ] Step 2 timeline: `[X] week`
-- [ ] Step 3 timeline: `[X]–[X] weeks`
-- [ ] Support hours and response times: `[SUPPORT HOURS AND RESPONSE TIMES — to be confirmed]`
+- [x] Build timeline: about one month for development and testing.
+- [x] Support: small issues in working hours, emergencies 24/7.
 
-## 5. Pricing FAQ (`src/content/faq.ts`) and Pricing page
+## 5. Pricing FAQ (`src/content/faq.ts`)
 
-- [ ] What happens if Thapsus closes: `[The handover terms will be set out in your contract.]`
-- [ ] What if something breaks: `[Support hours and response times — to be confirmed.]`
-- [ ] Can we cancel: `[NOTICE PERIOD]` and `[Options for keeping the software after you leave — to be confirmed.]`
-- [ ] How long does a build take: `[X]–[X] weeks`
-- [ ] VAT note under the plans: `[VAT — confirm whether prices include or exclude VAT.]`
+- [x] Handover, support, cancellation and build-time answers are filled in.
 
 ## 6. Work: case studies (`src/content/work.ts`)
 
-For both the **ERP system** and the **church discipleship system**:
+- [x] Heritage Global Solutions (ERP), Cebuka (tender and trade ERP) and Potter’s House Church (discipleship) are written up from the systems themselves.
+- [ ] **Cebuka or Hadari?** The Cebuka system was renamed **Hadari** in August. Change `client` in `src/content/work.ts` (and `name` in `src/content/testimonials.ts`) if the client now trades as Hadari.
+- [ ] The screens are illustrations based on each real workflow, using sample data. Swap in real screenshots if the clients agree.
 
-- [ ] Headline
-- [ ] Client type (sector, size, location, and whether you can name them)
-- [ ] The problem
-- [ ] What you built (modules, key details)
-- [ ] Results: verified figures only, with the client's permission
+## 7. Testimonials (`src/content/testimonials.ts`)
 
-The screens shown are illustrations with sample data and are labelled as such. Replace them with real screenshots if the client agrees.
+- [ ] Three **draft** quotes are written, one per client. Send each client their draft to approve or edit, then set `approved: true`. Until at least one is approved, the Home page shows the three case studies instead, and nothing appears as a quote.
 
-## 7. Testimonials (`src/components/home/Testimonials.tsx`)
+## 8. Legal pages
 
-- [ ] Three testimonials, with name, role and business type. Use real quotes only, with permission. To hide the section until you have them, remove `<Testimonials />` from `src/app/page.tsx`.
-
-## 8. Legal pages (templates, have them reviewed)
-
-**Privacy policy** (`src/app/privacy/page.tsx`)
-
-- [ ] `[BOOKING FORM FIELDS — confirm]`: what Cal.com collects when someone books
-- [ ] `[MARKETING AND AUTOMATED DECISIONS — confirm …]`
-- [ ] `[DATA PROCESSING TERMS — confirm these are in place with each provider]`
-- [ ] `[HOSTING REGION — confirm]`: the Railway region your service runs in
-- [x] Email provider: set to Zoho Mail.
-- [ ] `[ZOHO DATA CENTRE — confirm …]`: which Zoho region your account uses (EU accounts sign in at zoho.eu)
-- [ ] `[INTERNATIONAL TRANSFERS — confirm the safeguard used for each provider …]`
-- [ ] `[RETENTION PERIOD — e.g. 12 months after our last contact]`
-- [ ] `[CLIENT RECORDS RETENTION — e.g. 6 years …]`
-- [ ] `[SERVER LOG RETENTION — …]`
-- [ ] `[GA RETENTION — e.g. 14 months, confirm]`: set to match your GA4 data retention setting
-- [ ] `[SECURITY MEASURES — confirm …]`
-
-**Cookie policy** (`src/app/cookies/page.tsx`)
-
-- [ ] `[GA RETENTION — …]`
-- [ ] The cookie `_ga_<container-id>` is really named `_ga_` followed by your measurement ID without the `G-`.
-
-**Terms** (`src/app/terms/page.tsx`)
-
-- [ ] `[VAT — …]`
-
-- [ ] Once all three have been reviewed, remove the "Template for review" notice in `src/components/legal/LegalDocument.tsx` and update the "Last updated" dates.
+- [x] Reviewed and finalised. The "Template for review" notice has been removed.
+- [ ] **ICO registration number** (`legal.icoNumber` in `src/config/site.ts`): add it if you have one. The sentence stays hidden while it's empty.
+- [ ] When you add Google Analytics, set GA4's data retention to **14 months** (Admin → Data collection → Data retention) to match the privacy and cookie policies.
 
 ## 9. Optional polish
 

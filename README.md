@@ -67,18 +67,19 @@ Anything in `[SQUARE BRACKETS]` is a placeholder.
 | `process.ts` | The four steps (Home and How it works) and their timelines |
 | `faq.ts` | Pricing FAQ questions and answers |
 | `trust.ts` | The "Low risk. By design." tiles |
-| `work.ts` | The case studies (all placeholders for now) |
+| `work.ts` | The case studies: Heritage Global Solutions, Cebuka and Potter’s House Church |
+| `testimonials.ts` | Client quotes, each shown only once approved |
 | `navigation.ts` | Header and footer links |
 
 Headlines inside individual sections are in `src/components/home/*.tsx` and `src/app/*/page.tsx`.
 
 ### Legal pages
 
-`src/app/privacy/page.tsx`, `src/app/cookies/page.tsx` and `src/app/terms/page.tsx` are **templates**. Each shows a "Template for review" notice. Fill in the placeholders and have them checked before relying on them. When you're done, remove the notice from `src/components/legal/LegalDocument.tsx`.
+`src/app/privacy/page.tsx`, `src/app/cookies/page.tsx` and `src/app/terms/page.tsx` have been reviewed and finalised. Update the "Last updated" date in each file whenever you change one.
 
 ### Testimonials
 
-`src/components/home/Testimonials.tsx` holds three clearly marked placeholders. Only add real quotes, with permission.
+Quotes live in `src/content/testimonials.ts`. Each has an `approved` flag, and a quote only appears once it's `true`. Only set that once the client has confirmed the exact wording. Until any quote is approved, the Home page shows the case studies from `src/content/work.ts` instead.
 
 ### Logo
 

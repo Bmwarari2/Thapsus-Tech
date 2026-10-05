@@ -3,16 +3,25 @@ import type { ReactNode } from "react";
 export const NAV_ITEMS = ["Today", "Customers", "Bookings", "Jobs", "Portal", "Reports", "Team"] as const;
 export type NavItem = (typeof NAV_ITEMS)[number];
 
+type Props<T extends string> = {
+  active: T;
+  children: ReactNode;
+  /** Sidebar items; defaults to the general business app menu. */
+  items?: readonly T[];
+  brand?: string;
+};
+
 /** Shared sidebar + content frame for laptop app screens. */
-export function AppShell({ active, children }: { active: NavItem; children: ReactNode }) {
+export function AppShell<T extends string = NavItem>({ active, children, items, brand = "Your business" }: Props<T>) {
+  const menu = (items ?? NAV_ITEMS) as readonly string[];
   return (
     <div className="mk-app">
       <aside className="mk-side">
         <div className="mk-brand">
           <i />
-          Your business
+          {brand}
         </div>
-        {NAV_ITEMS.map((item) => (
+        {menu.map((item) => (
           <div key={item} className={`mk-nav ${item === active ? "is-on" : ""}`}>
             {item}
           </div>
