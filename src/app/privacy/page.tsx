@@ -204,7 +204,7 @@ export default function PrivacyPage() {
           <strong>Resend</strong> (United States) delivers enquiry form submissions to our email inbox.
         </li>
         <li>
-          <strong>[EMAIL PROVIDER — confirm]</strong> hosts our email inbox, where enquiries are received and kept.
+          <strong>Zoho Mail</strong> (Zoho Corporation) hosts our email inbox, where enquiries are received and kept. [ZOHO DATA CENTRE — confirm, e.g. EU or US, from your Zoho account region]
         </li>
         <li>
           <strong>Google</strong> provides Google Analytics, which runs only if you accept analytics cookies.

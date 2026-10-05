@@ -15,9 +15,9 @@ Everything below is either shown on the site in `[SQUARE BRACKETS]` or needs con
 
 ## 2. Hosting and email (Railway variables)
 
-- [ ] `RESEND_API_KEY`: until this is set, the live form asks visitors to call or email instead.
+- [x] `RESEND_API_KEY`: set in Railway. The enquiry form is live and tested.
 - [x] `CONTACT_TO_EMAIL`: optional. Enquiries go to `admin@thapsus.uk` (from `contact.email`) unless this is set.
-- [ ] `CONTACT_FROM_EMAIL`: must use a domain verified in Resend.
+- [x] `CONTACT_FROM_EMAIL`: set in Railway (domain verified in Resend).
 - [ ] Custom domain `tech.thapsus.uk`: add the CNAME record Railway gives you.
 
 ## 3. Claims to confirm are true
@@ -70,7 +70,8 @@ The screens shown are illustrations with sample data and are labelled as such. R
 - [ ] `[MARKETING AND AUTOMATED DECISIONS — confirm …]`
 - [ ] `[DATA PROCESSING TERMS — confirm these are in place with each provider]`
 - [ ] `[HOSTING REGION — confirm]`: the Railway region your service runs in
-- [ ] `[EMAIL PROVIDER — confirm]`: the service that hosts your inbox
+- [x] Email provider: set to Zoho Mail.
+- [ ] `[ZOHO DATA CENTRE — confirm …]`: which Zoho region your account uses (EU accounts sign in at zoho.eu)
 - [ ] `[INTERNATIONAL TRANSFERS — confirm the safeguard used for each provider …]`
 - [ ] `[RETENTION PERIOD — e.g. 12 months after our last contact]`
 - [ ] `[CLIENT RECORDS RETENTION — e.g. 6 years …]`
