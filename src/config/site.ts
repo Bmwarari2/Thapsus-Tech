@@ -42,7 +42,7 @@ export const site = {
     registeredIn: "England and Wales",
     registeredOffice: "31 Collingwood Close, Hazel Grove, Stockport, SK7 4LB",
     /** ICO data protection registration number, if you have one. Leave empty to hide. */
-    icoNumber: "[ICO REGISTRATION NUMBER]",
+    icoNumber: "",
   },
 
   /**
@@ -85,7 +85,7 @@ export const site = {
         setupFee: 3000,
         monthlyFee: 250,
         users: 10,
-        supportHours: "[X] hours a month",
+        supportHours: "working hours, 24/7 for emergencies",
         features: ["One core tool", "Hosting, backups and security updates", "Email support", "Small improvements each month"],
       },
       {
@@ -95,7 +95,7 @@ export const site = {
         setupFee: 6000,
         monthlyFee: 450,
         users: 30,
-        supportHours: "[X] hours a month",
+        supportHours: "working hours, 24/7 for emergencies",
         features: ["Up to [X] connected tools", "Hosting, backups and security updates", "Priority phone and email support", "Monthly improvement time"],
       },
       {

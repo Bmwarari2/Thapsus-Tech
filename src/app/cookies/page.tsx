@@ -114,7 +114,7 @@ export default function CookiesPage() {
         and sets no cookies, unless you accept.
       </p>
       <p>
-        We keep Google Analytics data for [GA RETENTION — e.g. 14 months, confirm]. You can read more in{" "}
+        We keep Google Analytics data for 14 months. You can read more in{" "}
         <a href="https://policies.google.com/privacy">Google’s privacy policy</a> and in our{" "}
         <Link href="/privacy">privacy policy</Link>. You can also stop Google Analytics on every website you visit by
         installing <a href="https://tools.google.com/dlpage/gaoptout">Google’s opt-out browser add-on</a>.

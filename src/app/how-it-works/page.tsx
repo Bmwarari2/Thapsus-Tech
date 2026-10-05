@@ -23,7 +23,7 @@ const migration = [
 const support: { icon: IconName; title: string; text: string }[] = [
   { icon: "shield", title: "Hosting and security", text: "UK hosting, monitored, with security updates applied for you." },
   { icon: "backup", title: "Daily backups", text: "Kept for as long as you need them." },
-  { icon: "chat", title: "Support from people who know it", text: "The team that built your system answers when you need help." },
+  { icon: "chat", title: "Support from people who know it", text: "Small issues in working hours, emergencies 24/7, from the team that built your system." },
   { icon: "sparkle", title: "Improvements", text: "Small changes and new ideas, as your business grows." },
   { icon: "data", title: "Your data, always", text: "Export it whenever you like, in standard formats." },
   { icon: "users", title: "Priced per plan", text: "No per-seat bills when your team grows." },
@@ -61,10 +61,12 @@ export default function HowItWorksPage() {
                     <h2 className="t-title mt-6">{step.title}</h2>
                     <p className="t-lead mt-4 max-w-[30em] text-graphite">{step.summary}</p>
                   </div>
-                  <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-[14px] font-medium lg:col-span-5 lg:justify-self-end">
-                    <span className="text-graphite">Typical timeline</span>
-                    <span className="tabular">{step.timeline}</span>
-                  </p>
+                  {step.timeline ? (
+                    <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white px-4 py-2 text-[14px] font-medium lg:col-span-5 lg:justify-self-end">
+                      <span className="text-graphite">Typical timeline</span>
+                      <span className="tabular">{step.timeline}</span>
+                    </p>
+                  ) : null}
                 </div>
                 <dl className="mt-8 grid gap-4 md:mt-10 md:grid-cols-3 lg:gap-5">
                   {[
@@ -133,7 +135,7 @@ export default function HowItWorksPage() {
             ))}
           </ul>
           <p className="t-caption mt-8 text-center text-graphite">
-            Support hours and response times: [SUPPORT HOURS AND RESPONSE TIMES — to be confirmed].
+            Small issues are handled during normal working hours. Emergencies are covered 24/7.
           </p>
         </div>
       </section>

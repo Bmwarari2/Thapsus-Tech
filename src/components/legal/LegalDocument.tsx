@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { site } from "@/config/site";
 
 type Props = {
   title: string;
@@ -20,15 +19,6 @@ export function LegalDocument({ title, updated, intro, children }: Props) {
             {title}
           </h1>
           <p className="t-caption mt-4 text-graphite">Last updated: {updated}</p>
-
-          <aside
-            role="note"
-            className="mt-8 rounded-[var(--radius-tile-sm)] border border-[#f0d9a8] bg-[#fdf6e7] px-5 py-4 text-[15px] leading-[1.5] text-[#6b4a00]"
-          >
-            <strong className="font-semibold">Template for review.</strong> This document is a starting point written for{" "}
-            {site.legal.companyName}. It is not legal advice. Please check it, fill in anything in [square brackets] and have it
-            reviewed by a qualified professional before relying on it.
-          </aside>
 
           {intro ? <div className="prose-legal mt-10">{intro}</div> : null}
           <div className="prose-legal mt-10">{children}</div>

@@ -96,7 +96,7 @@ export default function PrivacyPage() {
       <h3>When you book a call</h3>
       <p>
         If you book a call through our Cal.com booking calendar, Cal.com collects the details you enter in its booking
-        form, such as your name, email address, the time you choose and any notes [BOOKING FORM FIELDS — confirm], and
+        form, such as your name, email address, the time you choose and any notes, and
         shares them with us so we can hold the call.
       </p>
 
@@ -186,25 +186,24 @@ export default function PrivacyPage() {
       </p>
       <p>
         We do not sell your personal information or use it for advertising, and we do not make decisions about you based
-        solely on automated processing. [MARKETING AND AUTOMATED DECISIONS — confirm both statements. If you plan to send
-        marketing emails, such as a newsletter, describe them here and explain how people can opt out.]
+        solely on automated processing. We do not send marketing emails.
       </p>
 
       <h2>5. Who we share your information with</h2>
       <p>
         We use the service providers below to run our website and handle enquiries. They process personal information on
-        our behalf and under contract [DATA PROCESSING TERMS — confirm these are in place with each provider].
+        our behalf and under their data processing terms.
       </p>
       <ul>
         <li>
           <strong>Railway</strong> (Railway Corporation, United States) hosts our website and keeps the server logs
-          described above. Hosting region: [HOSTING REGION — confirm].
+          described above. Hosting region: Europe West (the Netherlands).
         </li>
         <li>
           <strong>Resend</strong> (United States) delivers enquiry form submissions to our email inbox.
         </li>
         <li>
-          <strong>Zoho Mail</strong> (Zoho Corporation) hosts our email inbox, where enquiries are received and kept. [ZOHO DATA CENTRE — confirm, e.g. EU or US, from your Zoho account region]
+          <strong>Zoho Mail</strong> (Zoho Corporation) hosts our email inbox, where enquiries are received and kept. Our Zoho account is hosted in Zoho’s EU data centres.
         </li>
         <li>
           <strong>Google</strong> provides Google Analytics, which runs only if you accept analytics cookies.
@@ -237,8 +236,7 @@ export default function PrivacyPage() {
         </li>
       </ul>
       <p>
-        [INTERNATIONAL TRANSFERS — confirm the safeguard used for each provider: Railway, Resend, Google and Cal.com.] You
-        can contact us for more information about the safeguards we use.
+        For each provider, we rely on whichever of these safeguards applies to its service. You can contact us for more information about the safeguards we use.
       </p>
 
       <h2>7. How long we keep your information</h2>
@@ -257,19 +255,19 @@ export default function PrivacyPage() {
           <tbody>
             <tr>
               <td>Enquiries and booked calls that do not lead to work</td>
-              <td>[RETENTION PERIOD — e.g. 12 months after our last contact]</td>
+              <td>12 months after our last contact</td>
             </tr>
             <tr>
               <td>Client records, including contracts, invoices and correspondence</td>
-              <td>[CLIENT RECORDS RETENTION — e.g. 6 years after the end of the contract, for tax and legal reasons]</td>
+              <td>6 years after the end of the contract, for tax and legal reasons</td>
             </tr>
             <tr>
               <td>Server logs</td>
-              <td>[SERVER LOG RETENTION — as set by hosting provider, confirm]</td>
+              <td>For as long as our hosting provider keeps them, after which they are deleted automatically</td>
             </tr>
             <tr>
               <td>Google Analytics data</td>
-              <td>[GA RETENTION — e.g. 14 months, confirm]</td>
+              <td>14 months</td>
             </tr>
             <tr>
               <td>Your cookie choices (the thapsus_consent cookie)</td>
@@ -283,8 +281,7 @@ export default function PrivacyPage() {
       <p>
         We use appropriate technical and organisational measures to protect personal information against loss, misuse and
         unauthorised access. Our website is served over an encrypted connection (HTTPS), and access to enquiries is limited
-        to the people at {legal.tradingName} who need it. [SECURITY MEASURES — confirm, and add any others, e.g.
-        two-factor authentication on business accounts.]
+        to the people at {legal.tradingName} who need it.
       </p>
       <p>
         No way of sending information over the internet is completely secure. If a personal data breach happens, we will

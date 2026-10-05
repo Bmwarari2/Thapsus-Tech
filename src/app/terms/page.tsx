@@ -116,8 +116,7 @@ export default function TermsPage() {
       <h2>7. Prices</h2>
       <p>
         Prices shown on our website are indicative only. They are not an offer and may change. The price for any work is
-        the price we confirm in a written proposal. [VAT — confirm whether the prices shown include or exclude VAT, and
-        say so here.]
+        the price we confirm in a written proposal. Any VAT due will be shown in your proposal.
       </p>
 
       <h2>8. Our software services</h2>

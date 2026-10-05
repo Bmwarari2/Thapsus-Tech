@@ -187,8 +187,7 @@ export default function PricingPage() {
             })}
           </ul>
           <p className="t-caption mt-8 text-center text-graphite">
-            {placeholder ? "Prices to be confirmed. " : ""}[VAT — confirm whether prices include or exclude VAT.] Final prices are
-            fixed in your written proposal.
+            {placeholder ? "Prices to be confirmed. " : ""}Final prices, including any VAT, are fixed in your written proposal.
           </p>
         </div>
       </section>
