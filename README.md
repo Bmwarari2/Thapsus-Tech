@@ -109,7 +109,7 @@ Enquiries are checked in the browser, then sent to `/api/contact` (`src/app/api/
 | Variable | Example | Purpose |
 | --- | --- | --- |
 | `RESEND_API_KEY` | `re_…` | Lets the site send email |
-| `CONTACT_TO_EMAIL` | `hello@thapsus.uk` | Where enquiries go. Defaults to `contact.email` in `site.ts`. Separate several addresses with commas |
+| `CONTACT_TO_EMAIL` | `admin@thapsus.uk` | Where enquiries go. Defaults to `contact.email` in `site.ts`. Separate several addresses with commas |
 | `CONTACT_FROM_EMAIL` | `Thapsus website <website@thapsus.uk>` | The sender. Must use your verified domain |
 
 Until these are set, the live form says it can't send and asks visitors to call or email instead. In local development, enquiries are printed to the terminal.

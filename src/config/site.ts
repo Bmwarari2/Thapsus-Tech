@@ -22,7 +22,7 @@ export const site = {
 
   contact: {
     /** Shown on the site, and where enquiries are sent unless CONTACT_TO_EMAIL is set. */
-    email: "[EMAIL ADDRESS]",
+    email: "admin@thapsus.uk",
     phoneDisplay: "07346 813917",
     /** International format for tap-to-call links. */
     phoneHref: "+447346813917",
