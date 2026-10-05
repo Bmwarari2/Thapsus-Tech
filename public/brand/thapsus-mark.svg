@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 482 460" role="img" aria-labelledby="thapsus-mark-title">
+  <title id="thapsus-mark-title">Thapsus</title>
+  <defs>
+    <linearGradient id="thapsus-f1" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#FA6421"/>
+      <stop offset="1" stop-color="#F97B27"/>
+    </linearGradient>
+    <linearGradient id="thapsus-f2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFAE27"/>
+      <stop offset="1" stop-color="#FFB628"/>
+    </linearGradient>
+    <linearGradient id="thapsus-f3" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#FF9A20"/>
+      <stop offset="1" stop-color="#F88429"/>
+    </linearGradient>
+    <linearGradient id="thapsus-f4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F34B1C"/>
+      <stop offset="1" stop-color="#F13916"/>
+    </linearGradient>
+  </defs>
+  <polygon points="0,230 304,0 177,230" fill="url(#thapsus-f1)"/>
+  <polygon points="304,0 482,0 177,230" fill="url(#thapsus-f2)"/>
+  <polygon points="0,230 177,230 304,460" fill="url(#thapsus-f3)"/>
+  <polygon points="177,230 482,460 304,460" fill="url(#thapsus-f4)"/>
+  <polygon points="271,230 383,157 339,230" fill="#FB7E23"/>
+  <polygon points="383,157 383,303 339,230" fill="#FFAD25"/>
+  <polygon points="271,230 339,230 383,303" fill="#F1441A"/>
+</svg>

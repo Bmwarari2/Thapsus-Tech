@@ -1,26 +1,245 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
+@import "../styles/devices.css";
+@import "../styles/mockups.css";
 
+/* ─────────────────────────────────────────────────────────────
+   Design tokens
+   The accent colours are injected from src/config/site.ts on <html>;
+   the values below are only fallbacks.
+   ───────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: #0a7560;
+  --accent-hover: #08604f;
+  --accent-on-dark: #3ccaa5;
+  --accent-on-dark-hover: #5fd8b9;
+  --accent-wash: #e5f3ef;
+
+  --nav-height: 52px;
+  --subnav-height: 52px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-white: #ffffff;
+  --color-mist: #f5f5f7;
+  --color-ink: #1d1d1f;
+  --color-graphite: #6e6e73;
+  --color-line: #d2d2d7;
+  --color-black: #000000;
+  --color-night: #1d1d1f;
+  --color-night-2: #2c2c2e;
+  --color-night-text: #a1a1a6;
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-on-dark: var(--accent-on-dark);
+  --color-accent-on-dark-hover: var(--accent-on-dark-hover);
+  --color-accent-wash: var(--accent-wash);
+
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --radius-tile: 28px;
+  --radius-tile-sm: 20px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─────────────────────────────────────────────────────────────
+   Type scale
+   ───────────────────────────────────────────────────────────── */
+@utility t-display {
+  font-size: clamp(2.75rem, 7.4vw + 0.75rem, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.032em;
+  line-height: 1;
+}
+@utility t-headline {
+  font-size: clamp(2.5rem, 5.6vw + 0.625rem, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+}
+@utility t-title {
+  font-size: clamp(2rem, 3.6vw + 0.625rem, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+@utility t-tile {
+  font-size: clamp(1.5rem, 1.2vw + 1.125rem, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.018em;
+  line-height: 1.15;
+}
+@utility t-lead {
+  font-size: clamp(1.1875rem, 0.8vw + 0.9375rem, 1.5rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+@utility t-body {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+@utility t-caption {
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+@utility t-eyebrow {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Page container */
+@utility wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  @media (width >= 740px) {
+    padding-inline: 32px;
+  }
+}
+@utility wrap-wide {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  @media (width >= 740px) {
+    padding-inline: 32px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: calc(var(--nav-height) + 16px);
+  }
+  body {
+    background: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-optical-sizing: auto;
+  }
+  ::selection {
+    background: var(--accent-wash);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--accent-on-dark);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 14px;
+  transform: translateY(-150%);
+  transition: transform 0.2s var(--ease-out-expo);
+}
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* "Learn more ›" links */
+.link-more {
+  color: var(--accent);
+  white-space: nowrap;
+}
+.link-more::after {
+  content: "\00a0›";
+}
+.link-more:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.on-dark .link-more {
+  color: var(--accent-on-dark);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Entrance animation (CSS only, so it runs before any script loads)
+   Use: class="rise" style="--d: 120ms"
+   ───────────────────────────────────────────────────────────── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--rise-from, 0.4em), 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes rise-device {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 64px, 0) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 1.1s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+.rise-device {
+  animation: rise-device 1.6s var(--ease-out-expo) both;
+  animation-delay: var(--d, 0ms);
+}
+
+/* Two versions of the pinned "Tools we build" story:
+   pinned for large screens with motion, stacked for everyone else. */
+.scrolly-pinned {
+  display: none;
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .js .scrolly-pinned {
+    display: block;
+  }
+  .js .scrolly-stacked {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
