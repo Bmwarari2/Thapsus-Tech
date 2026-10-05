@@ -62,7 +62,7 @@ export const site = {
 
   /** Cal.com booking link, e.g. "thapsus/software-review". Loads only after cookie consent. */
   booking: {
-    calLink: "[CAL.COM LINK]",
+    calLink: "thapsusadmin/30min",
   },
 
   /** Google Analytics 4 measurement ID, e.g. "G-XXXXXXX". Loads only after cookie consent. Leave empty to disable. */

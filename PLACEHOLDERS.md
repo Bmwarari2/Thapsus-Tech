@@ -6,7 +6,7 @@ Everything below is either shown on the site in `[SQUARE BRACKETS]` or needs con
 
 - [x] **Email address** (`contact.email`): set to `admin@thapsus.uk`. It shows in the footer, contact page and legal pages, and is the default inbox for enquiries.
 - [ ] **ICO registration number** (`legal.icoNumber`): shown in the privacy policy. Leave it as an empty string `""` to hide it.
-- [ ] **Cal.com booking link** (`booking.calLink`), e.g. `thapsus/software-review`.
+- [x] **Cal.com booking link** (`booking.calLink`): set to `thapsusadmin/30min`. Change it to `thapsusadmin/15min`, or `thapsusadmin` to let visitors choose.
 - [ ] **Google Analytics 4 ID** (`analytics.gaMeasurementId`), e.g. `G-XXXXXXX`. Leave it empty if you don't want analytics.
 - [ ] **Prices** (`pricing.plans`): setup fee, monthly fee and number of users for Starter and Growth.
 - [ ] **Plan features:** "Up to [X] connected tools" (Growth) and `supportHours` ("[X] hours a month").
