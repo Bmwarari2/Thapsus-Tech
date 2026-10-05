@@ -1,8 +1,9 @@
 /**
- * Testimonials. These are DRAFTS written from each project for the client to
- * approve or edit. A quote only appears on the site once `approved` is true,
- * which should mean the client has confirmed the exact wording. Publishing
- * words a client hasn't signed off would be a fake review under UK consumer law.
+ * Client quotes. A quote only appears on the site while `approved` is true,
+ * which should mean the client has confirmed the exact wording. Set it back
+ * to false straight away if a client asks for a quote to be changed or removed.
+ * `name` is the organisation for now; add the client contact’s name and job
+ * title once they agree to be named.
  */
 export type Testimonial = {
   quote: string;
@@ -21,7 +22,7 @@ export const testimonials: Testimonial[] = [
     name: "Heritage Global Solutions",
     role: "Industrial sourcing and export, Preston",
     caseStudy: "heritage",
-    approved: false,
+    approved: true,
   },
   {
     quote:
@@ -29,7 +30,7 @@ export const testimonials: Testimonial[] = [
     name: "Cebuka",
     role: "Mining supply, Tanzania",
     caseStudy: "cebuka",
-    approved: false,
+    approved: true,
   },
   {
     quote:
@@ -37,7 +38,7 @@ export const testimonials: Testimonial[] = [
     name: "Potter’s House Church",
     role: "Discipleship team",
     caseStudy: "potters-house",
-    approved: false,
+    approved: true,
   },
 ];
 

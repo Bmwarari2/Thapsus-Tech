@@ -79,7 +79,7 @@ Headlines inside individual sections are in `src/components/home/*.tsx` and `src
 
 ### Testimonials
 
-Quotes live in `src/content/testimonials.ts`. Each has an `approved` flag, and a quote only appears once it's `true`. Only set that once the client has confirmed the exact wording. Until any quote is approved, the Home page shows the case studies from `src/content/work.ts` instead.
+Quotes live in `src/content/testimonials.ts`. Each has an `approved` flag, and a quote only appears while it's `true`. Only set that once the client has confirmed the exact wording. On the Home page each quote sits in its project's card; a project without an approved quote shows its headline instead. On the Work page the quote appears at the end of the case study.
 
 ### Logo
 

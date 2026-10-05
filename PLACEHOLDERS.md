@@ -48,7 +48,8 @@ These are stated on the site as fact, based on your answers. Please double-check
 
 ## 7. Testimonials (`src/content/testimonials.ts`)
 
-- [ ] Three **draft** quotes are written, one per client. Send each client their draft to approve or edit, then set `approved: true`. Until at least one is approved, the Home page shows the three case studies instead, and nothing appears as a quote.
+- [x] Three quotes, one per client, approved and live on the Home and Work pages.
+- [ ] Add each client contact's name and job title once they agree to be named.
 
 ## 8. Legal pages
 
