@@ -41,7 +41,6 @@ export default function HowItWorksPage() {
         ]}
       />
       <PageIntro
-        eyebrow="How it works"
         title="Four steps. No surprises."
         lead="A fixed price before we start, a system your team helps shape, and a team who stays with you after launch."
       />

@@ -10,13 +10,18 @@ type Props = {
   cta?: { href: string; label: string };
 };
 
-/** Product-style secondary bar: page title, in-page links and a pill CTA. Sticks under the main nav. */
+/**
+ * Product-style secondary bar: page title, in-page links and a pill CTA. Sticks
+ * under the main nav on tablets and desktops. On those pages the main nav drops
+ * its own CTA so it only appears once. Phones show the main nav only.
+ */
 export function SubNav({ title, links = [], cta = primaryCta }: Props) {
   const dark = useOverDark(52 + 24);
 
   return (
     <div
-      className={`sticky top-[var(--nav-height)] z-40 border-b transition-[background-color,border-color,color] duration-500 ${
+      data-subnav
+      className={`sticky top-[var(--nav-height)] z-40 hidden border-b transition-[background-color,border-color,color] duration-500 md:block ${
         dark
           ? "on-dark border-white/[0.08] bg-[rgba(22,22,23,0.72)] text-white"
           : "border-black/[0.08] bg-white/[0.72] text-ink"

@@ -32,13 +32,13 @@ export function Calculator() {
   return (
     <div className="grid gap-5 lg:grid-cols-12 lg:gap-6">
       {/* Inputs */}
-      <div className="flex flex-col gap-5 lg:col-span-7">
-        <fieldset className="rounded-[var(--radius-tile)] bg-mist p-6 md:p-9">
+      <div className="flex min-w-0 flex-col gap-5 lg:col-span-7">
+        <fieldset className="min-w-0 rounded-[var(--radius-tile)] bg-mist p-5 sm:p-6 md:p-9">
           <legend className="float-left w-full">
             <span className="block text-[14px] font-semibold text-graphite">Step 1</span>
             <span className="t-tile mt-1 block">How many people use your software?</span>
           </legend>
-          <div className="clear-both flex items-center gap-4 pt-7">
+          <div className="clear-both flex flex-wrap items-center gap-x-3 gap-y-2 pt-7 sm:gap-x-4">
             <button
               type="button"
               onClick={() => setStaff((s) => clampStaff(s - 1))}
@@ -58,7 +58,7 @@ export function Calculator() {
               max={maxStaff}
               value={staff}
               onChange={(e) => setStaff(clampStaff(Number(e.target.value)))}
-              className="tabular w-[3.2em] rounded-xl bg-transparent text-center text-[44px] font-bold tracking-[-0.03em] [appearance:textfield] focus-visible:bg-white [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+              className="tabular w-[3.2em] rounded-xl bg-transparent text-center text-[36px] font-bold sm:text-[44px] tracking-[-0.03em] [appearance:textfield] focus-visible:bg-white [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
             />
             <button
               type="button"
@@ -88,7 +88,7 @@ export function Calculator() {
           </div>
         </fieldset>
 
-        <fieldset className="rounded-[var(--radius-tile)] bg-mist p-6 md:p-9">
+        <fieldset className="min-w-0 rounded-[var(--radius-tile)] bg-mist p-5 sm:p-6 md:p-9">
           <legend className="float-left w-full">
             <span className="block text-[14px] font-semibold text-graphite">Step 2</span>
             <span className="t-tile mt-1 block">Which tools do you pay for?</span>
@@ -180,7 +180,7 @@ export function Calculator() {
       </div>
 
       {/* Results */}
-      <aside aria-labelledby={`${uid}-results`} className="lg:col-span-5">
+      <aside aria-labelledby={`${uid}-results`} className="min-w-0 lg:col-span-5">
         <div className="on-dark rounded-[var(--radius-tile)] bg-black p-7 text-white md:p-9 lg:sticky lg:top-[calc(var(--nav-height)+var(--subnav-height)+24px)]">
           <h3 id={`${uid}-results`} className="flex items-center justify-between gap-3 text-[14px] font-semibold text-night-text">
             Your estimate
@@ -253,7 +253,7 @@ export function Calculator() {
             {liveSummary}
           </p>
 
-          <ButtonLink href="/contact" tone="dark" size="lg" className="mt-8 w-full whitespace-normal text-center">
+          <ButtonLink href="/contact" tone="dark" size="lg" className="mt-8 w-full py-3 text-center text-[17px]! leading-snug text-balance whitespace-normal! sm:text-[19px]!">
             Get an exact figure — book a free review
           </ButtonLink>
           <p className="mt-5 text-[13px] leading-[1.5] text-night-text">

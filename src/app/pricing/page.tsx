@@ -35,7 +35,6 @@ export default function PricingPage() {
         ]}
       />
       <PageIntro
-        eyebrow="Pricing"
         title="Simple, fair pricing."
         lead="A one-off fee to build your system. Then one monthly fee for hosting, support, security and improvements."
       />

@@ -77,7 +77,7 @@ export function SiteHeader() {
               : "border-black/[0.08] bg-white/[0.72] text-ink backdrop-blur-[20px] backdrop-saturate-[180%]"
         }`}
       >
-        <nav aria-label="Main" className="wrap flex h-full items-center gap-7">
+        <nav aria-label="Main" className="wrap flex h-full items-center gap-4 sm:gap-7">
           <Link href="/" className="text-[19px]" aria-label="Thapsus home">
             <Lockup />
           </Link>
@@ -98,35 +98,37 @@ export function SiteHeader() {
             ))}
           </ul>
 
-          <ButtonLink href={primaryCta.href} size="sm" tone={dark ? "dark" : "light"} className="ml-auto lg:ml-0">
-            {primaryCta.label}
-          </ButtonLink>
+          <div className="ml-auto flex items-center gap-2 sm:gap-4 lg:ml-0">
+            <ButtonLink href={primaryCta.href} size="sm" tone={dark ? "dark" : "light"} className="header-cta">
+              {primaryCta.label}
+            </ButtonLink>
 
-          <button
-            ref={toggleRef}
-            type="button"
-            className="-mr-2 grid size-11 place-items-center rounded-full lg:hidden"
-            aria-expanded={open}
-            aria-controls={menuId}
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => {
-              setOpenedFor(pathname);
-              setOpen((v) => !v);
-            }}
-          >
-            <span className="relative block h-3 w-[18px]" aria-hidden="true">
-              <span
-                className={`absolute left-0 h-[1.5px] w-full rounded bg-current transition-transform duration-300 ease-[var(--ease-out-expo)] ${
-                  open ? "top-[5px] rotate-45" : "top-[1px]"
-                }`}
-              />
-              <span
-                className={`absolute left-0 h-[1.5px] w-full rounded bg-current transition-transform duration-300 ease-[var(--ease-out-expo)] ${
-                  open ? "top-[5px] -rotate-45" : "top-[9px]"
-                }`}
-              />
-            </span>
-          </button>
+            <button
+              ref={toggleRef}
+              type="button"
+              className="-mr-2 grid size-11 place-items-center rounded-full lg:hidden"
+              aria-expanded={open}
+              aria-controls={menuId}
+              aria-label={open ? "Close menu" : "Open menu"}
+              onClick={() => {
+                setOpenedFor(pathname);
+                setOpen((v) => !v);
+              }}
+            >
+              <span className="relative block h-3 w-[18px]" aria-hidden="true">
+                <span
+                  className={`absolute left-0 h-[1.5px] w-full rounded bg-current transition-transform duration-300 ease-[var(--ease-out-expo)] ${
+                    open ? "top-[5px] rotate-45" : "top-[1px]"
+                  }`}
+                />
+                <span
+                  className={`absolute left-0 h-[1.5px] w-full rounded bg-current transition-transform duration-300 ease-[var(--ease-out-expo)] ${
+                    open ? "top-[5px] -rotate-45" : "top-[9px]"
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
         </nav>
       </div>
 

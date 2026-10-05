@@ -123,6 +123,9 @@
     scroll-padding-top: calc(var(--nav-height) + var(--subnav-height) + 16px);
   }
   body {
+    /* Never let a stray element make the page pan sideways on phones.
+       "clip" (unlike "hidden") keeps sticky headers working. */
+    overflow-x: clip;
     background: var(--color-white);
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -167,6 +170,13 @@
 }
 .skip-link:focus-visible {
   transform: none;
+}
+
+/* Pages with a sub-nav show the CTA there, so the main nav hides its own. */
+@media (width >= 48rem) {
+  body:has([data-subnav]) .header-cta {
+    display: none;
+  }
 }
 
 /* "Learn more ›" links */

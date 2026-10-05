@@ -32,7 +32,6 @@ export default function SolutionsPage() {
         ]}
       />
       <PageIntro
-        eyebrow="Solutions"
         title="Tools that fit."
         lead="We replace off-the-shelf subscriptions with software shaped around your business. Here’s what we build most often."
       />

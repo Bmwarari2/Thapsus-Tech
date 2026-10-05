@@ -89,7 +89,7 @@ export function EnquiryForm() {
     [errors[key] ? `${fieldId(key)}-error` : "", hint ? `${fieldId(key)}-hint` : ""].filter(Boolean).join(" ") || undefined;
 
   return (
-    <form noValidate onSubmit={onSubmit} className="rounded-[var(--radius-tile)] bg-mist p-6 md:p-10" aria-describedby={`${uid}-required`}>
+    <form noValidate onSubmit={onSubmit} className="relative rounded-[var(--radius-tile)] bg-mist p-6 md:p-10" aria-describedby={`${uid}-required`}>
       {errorList.length ? (
         <div
           ref={summaryRef}
@@ -245,7 +245,7 @@ export function EnquiryForm() {
       </div>
 
       {/* Honeypot: hidden from people and assistive tech; bots tend to fill it in. */}
-      <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
+      <div aria-hidden="true" className="absolute left-0 top-0 h-px w-px overflow-hidden opacity-0 [clip-path:inset(50%)]">
         <label htmlFor={`${uid}-website`}>Leave this field empty</label>
         <input ref={honeypotRef} id={`${uid}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
       </div>
