@@ -594,3 +594,142 @@ export function PhoneJobSheet() {
     </div>
   );
 }
+
+/* ── Customer record: everything in one place ─────────────── */
+export function ScreenCustomer() {
+  const timeline: [string, string, string, string?][] = [
+    ["Today", "Invoice #2219 paid", "£1,240 · Card", "green"],
+    ["Yesterday", "Job #1042 signed off", "Boiler service · AK", "green"],
+    ["Thu", "Photos added to portal", "3 photos · shared with customer"],
+    ["Mon", "Booking confirmed", "Thursday 14:00 · reminder sent"],
+    ["2 Oct", "Quote accepted", "Service contract · £3,600", "green"],
+    ["29 Sep", "Enquiry received", "Website form"],
+  ];
+  return (
+    <AppShell active="Customers">
+      <div className="mk-top">
+        <div style={{ display: "flex", alignItems: "center", gap: "1em" }}>
+          <span className="mk-avatar mk-avatar--g" style={{ width: "3.4em", height: "3.4em", fontSize: "1em" }}>
+            ST
+          </span>
+          <div>
+            <div className="mk-h1">Sam Taylor</div>
+            <div className="mk-sub">Customer since 2023 · Hazel Grove · Service contract</div>
+          </div>
+        </div>
+        <div className="mk-actions">
+          <div className="mk-btn mk-btn--ghost">Call</div>
+          <div className="mk-btn mk-btn--ghost">Message</div>
+          <div className="mk-btn">+ New job</div>
+        </div>
+      </div>
+
+      <div style={{ display: "flex", gap: "1.6em", borderBottom: "1px solid var(--mk-line)", color: "var(--mk-muted)" }}>
+        {["Overview", "Jobs 9", "Quotes 3", "Invoices 11", "Files 14", "Portal"].map((tab, i) => (
+          <span
+            key={tab}
+            style={{
+              paddingBottom: "0.7em",
+              fontWeight: i === 0 ? 600 : 500,
+              color: i === 0 ? "#1d1d1f" : undefined,
+              boxShadow: i === 0 ? "inset 0 -2px 0 var(--accent)" : undefined,
+            }}
+          >
+            {tab}
+          </span>
+        ))}
+      </div>
+
+      <div className="mk-grid" style={{ gridTemplateColumns: "1fr 1.35fr 1fr", flex: 1 }}>
+        <div className="mk-grid" style={{ gridTemplateRows: "auto auto 1fr" }}>
+          <div className="mk-card mk-card--soft mk-stat">
+            <small>Lifetime value</small>
+            <b>£12,480</b>
+          </div>
+          <div className="mk-card mk-card--soft mk-stat">
+            <small>Next visit</small>
+            <b style={{ fontSize: "1.4em" }}>Annual service</b>
+            <div className="mk-sub">14 March · AK</div>
+          </div>
+          <div className="mk-card">
+            <div className="mk-card__head">Details</div>
+            <div className="mk-rows">
+              {[
+                ["Phone", "07700 900123"],
+                ["Email", "sam@example.com"],
+                ["Prefers", "Text messages"],
+              ].map(([k, v]) => (
+                <div className="mk-row" key={k}>
+                  <span className="mk-row__main">
+                    <small>{k}</small>
+                    <b>{v}</b>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mk-card">
+          <div className="mk-card__head">
+            Activity <span>All in one place</span>
+          </div>
+          <div className="mk-rows">
+            {timeline.map(([when, title, meta, tone]) => (
+              <div className="mk-row" key={title}>
+                <span
+                  style={{
+                    width: "0.7em",
+                    height: "0.7em",
+                    borderRadius: "50%",
+                    flex: "none",
+                    background: tone ? "var(--accent)" : "#c7c7cc",
+                  }}
+                />
+                <span className="mk-row__main">
+                  <b>{title}</b>
+                  <small>{meta}</small>
+                </span>
+                <span className="mk-time" style={{ width: "auto" }}>
+                  {when}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mk-grid" style={{ gridTemplateRows: "auto 1fr" }}>
+          <div className="mk-card">
+            <div className="mk-card__head">
+              Open quote <span className="mk-pill mk-pill--amber">Awaiting reply</span>
+            </div>
+            <b style={{ fontWeight: 600 }}>Bathroom refit</b>
+            <div className="mk-sub">£7,400 · sent 3 days ago</div>
+            <div className="mk-btn" style={{ marginTop: "0.9em" }}>
+              Send reminder
+            </div>
+          </div>
+          <div className="mk-card">
+            <div className="mk-card__head">
+              Portal <span className="mk-pill mk-pill--green">Active</span>
+            </div>
+            <div className="mk-rows">
+              {[
+                ["PDF", "Service report"],
+                ["JPG", "Boiler photos"],
+                ["PDF", "Invoice #2219"],
+              ].map(([ext, name]) => (
+                <div className="mk-row" key={name}>
+                  <span className="mk-file" data-ext={ext} />
+                  <span className="mk-row__main">
+                    <b>{name}</b>
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </AppShell>
+  );
+}

@@ -30,7 +30,7 @@ export function MotionProvider({ children }: { children: ReactNode }) {
       instance = new LenisClass({
         autoRaf: false,
         lerp: 0.11,
-        anchors: { offset: -64 },
+        anchors: { offset: -120 },
       });
       instance.on("scroll", ScrollTrigger.update);
       const lenisInstance = instance;

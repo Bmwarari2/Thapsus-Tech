@@ -1,0 +1,226 @@
+import type { IconName } from "@/components/ui/Icon";
+
+export type Solution = {
+  id: string;
+  name: string;
+  icon: IconName;
+  /** Two to five words, used as the headline on cards and detail sections. */
+  title: string;
+  /** One sentence. */
+  summary: string;
+  features: string[];
+  whoFor: string;
+  /** What it typically replaces, in general terms. */
+  replaces: string;
+};
+
+export const solutions: Solution[] = [
+  {
+    id: "crm",
+    name: "CRM & sales pipeline",
+    icon: "crm",
+    title: "Every lead. Nothing lost.",
+    summary: "Enquiries, quotes and follow-ups in one place, set up the way your team actually sells.",
+    features: [
+      "Leads captured from your website, inbox and phone",
+      "Pipeline stages that match how you sell",
+      "Quotes, reminders and follow-ups",
+      "Full customer history in one place",
+      "Simple sales reports",
+    ],
+    whoFor: "Service businesses and project teams tracking leads in spreadsheets or an oversized CRM.",
+    replaces: "Per-seat CRMs and sales spreadsheets",
+  },
+  {
+    id: "booking",
+    name: "Booking & scheduling",
+    icon: "booking",
+    title: "Your diary, sorted.",
+    summary: "Customers book online, your team sees their day, and double bookings stop.",
+    features: [
+      "Online booking that follows your real availability",
+      "Staff calendars, rooms and resources",
+      "Automatic confirmations and reminders",
+      "Deposits and payments through your payment provider",
+      "Capacity limits for classes and events",
+    ],
+    whoFor: "Clinics, salons, trainers, consultants, venues and anyone who lives by their diary.",
+    replaces: "Booking apps, shared calendars and phone tag",
+  },
+  {
+    id: "jobs",
+    name: "Job management",
+    icon: "jobs",
+    title: "From quote to sign-off.",
+    summary: "Quotes, job sheets, photos and customer sign-off for trades and field teams, all from a phone.",
+    features: [
+      "Quotes that turn into jobs in one tap",
+      "Job sheets and checklists on site",
+      "Photos, notes and parts used",
+      "Customer signatures on the phone",
+      "Scheduling and hand-off to invoicing",
+    ],
+    whoFor: "Trades, installers, maintenance and field service teams.",
+    replaces: "Field service apps, paper job sheets and WhatsApp groups",
+  },
+  {
+    id: "portals",
+    name: "Client portals",
+    icon: "portals",
+    title: "Clients, kept in the loop.",
+    summary: "Progress, documents and invoices in one secure place, so fewer emails ask for updates.",
+    features: [
+      "Secure client logins",
+      "Document upload and sharing",
+      "Project progress and milestones",
+      "Invoices and payment status",
+      "Messages kept with the project",
+    ],
+    whoFor: "Agencies, accountants, builders, consultancies and anyone who shares work with clients.",
+    replaces: "File-sharing links, email threads and portal add-ons",
+  },
+  {
+    id: "projects",
+    name: "Project & task boards",
+    icon: "projects",
+    title: "Work, clearly organised.",
+    summary: "Boards, lists and timelines shaped around the way your projects really run.",
+    features: [
+      "Boards, lists and timelines",
+      "Templates for work you repeat",
+      "Time tracking against jobs",
+      "Client-visible updates when you want them",
+      "Workload at a glance",
+    ],
+    whoFor: "Teams juggling projects in a generic board tool that never quite fits.",
+    replaces: "Per-seat project boards and task apps",
+  },
+  {
+    id: "inventory",
+    name: "Stock & inventory",
+    icon: "inventory",
+    title: "Know what you have.",
+    summary: "Live stock levels across every location, with alerts before you run out.",
+    features: [
+      "Stock levels across sites and vans",
+      "Low-stock alerts",
+      "Barcode scanning from a phone",
+      "Suppliers and purchase orders",
+      "Stock value and movement reports",
+    ],
+    whoFor: "Retailers, wholesalers, workshops and warehouses.",
+    replaces: "Inventory apps and stock spreadsheets",
+  },
+  {
+    id: "reports",
+    name: "Dashboards & reporting",
+    icon: "reports",
+    title: "Your numbers, at a glance.",
+    summary: "Live figures from across your business, without exporting a single spreadsheet.",
+    features: [
+      "Live key figures on one screen",
+      "Data pulled from the systems you use",
+      "Scheduled reports by email",
+      "Different views for owners and teams",
+      "Trends over weeks, months and years",
+    ],
+    whoFor: "Owners and managers who rebuild the same spreadsheet every month.",
+    replaces: "Manual reports and business intelligence subscriptions",
+  },
+  {
+    id: "hr",
+    name: "HR basics",
+    icon: "hr",
+    title: "People admin, simplified.",
+    summary: "Leave requests, onboarding, rotas and staff documents, without a full HR suite.",
+    features: [
+      "Leave requests and approvals",
+      "Onboarding checklists",
+      "Rotas and shift patterns",
+      "Staff documents with expiry reminders",
+      "A simple staff directory",
+    ],
+    whoFor: "Growing teams without an HR department.",
+    replaces: "Per-employee HR platforms and holiday spreadsheets",
+  },
+  {
+    id: "forms",
+    name: "Forms, checklists & approvals",
+    icon: "forms",
+    title: "Paperwork, without the paper.",
+    summary: "Digital forms and inspections that go straight to the right person for sign-off.",
+    features: [
+      "Digital forms and inspections",
+      "Approvals routed automatically",
+      "A full audit trail",
+      "Branded PDFs, generated for you",
+      "Works on phones, even on site",
+    ],
+    whoFor: "Anyone running on paper forms or long email chains.",
+    replaces: "Form builders, paper and approval-by-email",
+  },
+  {
+    id: "helpdesk",
+    name: "Helpdesk & ticketing",
+    icon: "helpdesk",
+    title: "Every request, answered.",
+    summary: "Turn a busy inbox into clear tickets, owners and updates.",
+    features: [
+      "Emails and forms become tickets",
+      "Assignments and priorities",
+      "Customer updates sent for you",
+      "A simple knowledge base",
+      "Response-time targets",
+    ],
+    whoFor: "Support teams, facilities, IT and property managers.",
+    replaces: "Per-agent helpdesk software and shared inboxes",
+  },
+  {
+    id: "membership",
+    name: "Membership management",
+    icon: "membership",
+    title: "Members, managed simply.",
+    summary: "Members, renewals, payments and groups in one place, for clubs, churches and charities.",
+    features: [
+      "Member records and renewals",
+      "Payments and reminders",
+      "Events and attendance",
+      "Groups, rotas and volunteers",
+      "Discipleship pathways and small groups for churches",
+    ],
+    whoFor: "Clubs, churches, charities and associations.",
+    replaces: "Membership platforms and volunteer spreadsheets",
+  },
+  {
+    id: "erp",
+    name: "ERP & operations",
+    icon: "erp",
+    title: "Your whole operation, connected.",
+    summary: "Orders, stock, production, purchasing and finance hand-off, working as one system.",
+    features: [
+      "Orders from quote to delivery",
+      "Stock, production and purchasing",
+      "Supplier and customer records",
+      "Hand-off to your accounting software",
+      "Operational reporting across the business",
+    ],
+    whoFor: "Businesses outgrowing spreadsheets and disconnected systems.",
+    replaces: "Expensive ERP licences and patchworks of apps",
+  },
+  {
+    id: "websites",
+    name: "Business websites",
+    icon: "websites",
+    title: "A website that works hard.",
+    summary: "Fast, accessible websites that are easy to update and connect straight to your systems.",
+    features: [
+      "Designed around your customers",
+      "Fast, accessible and search-friendly",
+      "Easy to update yourself",
+      "Enquiries flow straight into your CRM",
+      "Hosting and care included",
+    ],
+    whoFor: "Businesses whose website should bring in work, not just exist.",
+    replaces: "Website builders and plugin-heavy sites",
+  },
+];

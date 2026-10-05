@@ -7,14 +7,13 @@ import { Lockup } from "@/components/brand/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { useLenis } from "@/components/motion/MotionProvider";
 import { mainNav, primaryCta } from "@/content/navigation";
+import { useOverDark } from "@/lib/use-over-dark";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const lenis = useLenis();
   const [open, setOpen] = useState(false);
   const [openedFor, setOpenedFor] = useState(pathname);
-  const [overDark, setOverDark] = useState(false);
-  const [themePath, setThemePath] = useState(pathname);
   const menuId = useId();
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -23,37 +22,8 @@ export function SiteHeader() {
   if (open && openedFor !== pathname) {
     setOpen(false);
   }
-  // Start each page with the light header until a dark section says otherwise.
-  if (themePath !== pathname) {
-    setThemePath(pathname);
-    setOverDark(false);
-  }
-
-  // Switch to a dark translucent header while a dark section sits beneath it.
-  useEffect(() => {
-    let io: IntersectionObserver | null = null;
-    const visible = new Set<Element>();
-    const observe = () => {
-      io?.disconnect();
-      visible.clear();
-      const line = 26;
-      io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
-          setOverDark(visible.size > 0);
-        },
-        { rootMargin: `-${line}px 0px -${Math.max(0, window.innerHeight - line - 1)}px 0px` },
-      );
-      document.querySelectorAll('[data-nav-theme="dark"]').forEach((el) => io?.observe(el));
-    };
-    observe();
-    window.addEventListener("resize", observe);
-    return () => {
-      window.removeEventListener("resize", observe);
-      io?.disconnect();
-    };
-  }, [pathname]);
-
+  // Dark translucent header while a dark section sits beneath it.
+  const overDark = useOverDark(26);
   const dark = overDark && !open;
 
   const close = useCallback(() => {

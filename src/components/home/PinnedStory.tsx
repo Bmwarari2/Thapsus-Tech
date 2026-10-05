@@ -31,7 +31,7 @@ export function PinnedStory({ items, screens }: { items: StoryItem[]; screens: R
 
       const setActive = (index: number) => {
         steps.forEach((step, i) => {
-          step.classList.toggle("is-active", i === index);
+          step.dataset.active = String(i === index);
           step.querySelector("button")?.setAttribute("aria-current", i === index ? "step" : "false");
         });
       };
@@ -122,15 +122,15 @@ export function PinnedStory({ items, screens }: { items: StoryItem[]; screens: R
 
             <ol className="mt-14 flex flex-col gap-1" aria-label="Tools in this story">
               {items.map((tool, i) => (
-                <li key={tool.id} data-step className={`group ${i === 0 ? "is-active" : ""}`}>
+                <li key={tool.id} data-step className="group">
                   <button
                     type="button"
                     onClick={() => goTo(i)}
-                    className="flex items-center gap-3 py-1.5 text-[14px] text-night-text transition-colors duration-300 hover:text-white group-[.is-active]:text-white"
+                    className="flex items-center gap-3 py-1.5 text-[14px] text-night-text transition-colors duration-300 hover:text-white group-data-[active=true]:text-white"
                   >
                     <span
                       aria-hidden="true"
-                      className="h-[2px] w-4 origin-left rounded-full bg-[#48484a] transition-[transform,background-color] duration-500 ease-[var(--ease-out-expo)] group-[.is-active]:scale-x-[2.5] group-[.is-active]:bg-accent-on-dark"
+                      className="h-[2px] w-4 origin-left rounded-full bg-[#48484a] transition-[transform,background-color] duration-500 ease-[var(--ease-out-expo)] group-data-[active=true]:scale-x-[2.5] group-data-[active=true]:bg-accent-on-dark"
                     />
                     <span className="ml-5">{tool.eyebrow}</span>
                   </button>
