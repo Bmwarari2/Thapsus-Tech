@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { LegalDocument } from "@/components/legal/LegalDocument";
 import { isPlaceholder, site } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Website terms of use",
-  description: `The terms that apply when you use the ${site.legal.tradingName} website, including our savings calculator and the prices shown on the site.`,
-  alternates: { canonical: "/terms" },
-};
+  description:
+    `The terms that apply when you use the ${site.legal.tradingName} website, including our savings calculator and the prices shown on the site.`,
+  path: "/terms",
+});
 
 const { contact, legal } = site;
 const host = site.url.replace(/^https?:\/\//, "");

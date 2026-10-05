@@ -28,9 +28,9 @@ export function StepsReveal({ children, className = "" }: { children: ReactNode;
       items.forEach((item, i) => {
         gsap.fromTo(
           item,
-          { autoAlpha: 0, y: 32 },
+          { opacity: 0, y: 32 },
           {
-            autoAlpha: 1,
+            opacity: 1,
             y: 0,
             duration: 1,
             delay: horizontal ? i * 0.12 : 0,

@@ -8,7 +8,7 @@ type Props = {
   text: string;
   as?: ElementType;
   className?: string;
-  /** Opacity words start at before they're scrolled into view. */
+  /** Opacity words start at before they’re scrolled into view. 0.5 keeps large text above 3:1 contrast (WCAG AA). */
   from?: number;
 };
 
@@ -16,7 +16,7 @@ type Props = {
  * A large statement whose words brighten one by one as you scroll.
  * Words are real text in the HTML; only their opacity changes.
  */
-export function TextReveal({ text, as: Tag = "p", className = "", from = 0.16 }: Props) {
+export function TextReveal({ text, as: Tag = "p", className = "", from = 0.5 }: Props) {
   const ref = useRef<HTMLElement>(null);
   const words = text.split(/\s+/);
 

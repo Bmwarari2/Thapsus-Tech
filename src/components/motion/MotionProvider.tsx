@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import type Lenis from "lenis";
-import { loadMotion, prefersReducedMotion, scheduleRefresh } from "@/lib/motion";
+import { loadMotion, prefersNativeScroll, prefersReducedMotion, scheduleRefresh } from "@/lib/motion";
 
 const LenisContext = createContext<Lenis | null>(null);
 
@@ -19,7 +19,7 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion()) return;
+    if (prefersReducedMotion() || prefersNativeScroll()) return;
 
     let cancelled = false;
     let instance: Lenis | null = null;
@@ -95,17 +95,17 @@ function RevealOnScroll() {
       const below = gsap.utils
         .toArray<HTMLElement>("[data-reveal]")
         .filter((el) => el.getClientRects().length > 0 && el.getBoundingClientRect().top > window.innerHeight * 0.9);
-      gsap.set(below, { autoAlpha: 0, y: 28 });
+      gsap.set(below, { opacity: 0, y: 28 });
       const triggers = ScrollTrigger.batch(below, {
         start: "top 90%",
         once: true,
         onEnter: (batch) =>
-          gsap.to(batch, { autoAlpha: 1, y: 0, duration: 1.1, ease: "expo.out", stagger: 0.09, overwrite: true }),
+          gsap.to(batch, { opacity: 1, y: 0, duration: 1.1, ease: "expo.out", stagger: 0.09, overwrite: true }),
       });
       scheduleRefresh();
       kill = () => {
         triggers.forEach((t) => t.kill());
-        gsap.set(below, { clearProps: "opacity,visibility,transform" });
+        gsap.set(below, { clearProps: "opacity,transform" });
       };
     });
 

@@ -17,7 +17,7 @@ let motionPromise: Promise<Motion> | null = null;
  */
 export function loadMotion(): Promise<Motion> {
   if (!motionPromise) {
-    motionPromise = Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(
+    motionPromise = whenIdle().then(() => Promise.all([import("gsap"), import("gsap/ScrollTrigger")])).then(
       ([{ gsap }, { ScrollTrigger }]) => {
         gsap.registerPlugin(ScrollTrigger);
         gsap.defaults({ ease: "expo.out", duration: 1 });
@@ -27,6 +27,21 @@ export function loadMotion(): Promise<Motion> {
     );
   }
   return motionPromise;
+}
+
+/** Resolves after the page has loaded and the main thread is free, so animation code never competes with first paint. */
+function whenIdle(): Promise<void> {
+  return new Promise((resolve) => {
+    const idle = () =>
+      "requestIdleCallback" in window ? window.requestIdleCallback(() => resolve(), { timeout: 1500 }) : setTimeout(resolve, 200);
+    if (document.readyState === "complete") idle();
+    else window.addEventListener("load", idle, { once: true });
+  });
+}
+
+/** Touch-first devices keep native scrolling; smooth scrolling is for mouse and trackpad. */
+export function prefersNativeScroll(): boolean {
+  return typeof window !== "undefined" && window.matchMedia("(hover: none), (pointer: coarse)").matches;
 }
 
 export function prefersReducedMotion(): boolean {

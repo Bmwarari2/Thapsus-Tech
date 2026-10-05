@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { FinalCta } from "@/components/home/FinalCta";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
@@ -10,12 +11,13 @@ import { ToolsShowcase } from "@/components/home/ToolsShowcase";
 import { TrustBento } from "@/components/home/TrustBento";
 import { WhatWeBuild } from "@/components/home/WhatWeBuild";
 
-export const metadata: Metadata = {
-  title: { absolute: "Thapsus · Custom software built around your business" },
+export const metadata: Metadata = pageMetadata({
+  title: "Thapsus · Custom software built around your business",
   description:
     "Replace the subscriptions you barely use with software built around how your business works. Custom CRMs, booking systems, job management and client portals from Thapsus in Stockport.",
-  alternates: { canonical: "/" },
-};
+  path: "/",
+  absoluteTitle: true,
+});
 
 export default function HomePage() {
   return (

@@ -9,7 +9,7 @@
   --mk-line: #e8e8ed;
   --mk-soft: #f5f5f7;
   --mk-muted: #6e6e73;
-  --mk-amber: #b25e00;
+  --mk-amber: #9a5100;
   --mk-amber-wash: #fdf1e1;
 }
 .mk-app {
@@ -135,7 +135,7 @@
   padding: 0.6em 0.9em;
   border-radius: 99px;
   background: var(--mk-soft);
-  color: #a1a1a6;
+  color: var(--mk-muted);
 }
 .mk-btn {
   display: inline-flex;
@@ -213,15 +213,15 @@
   background: var(--mk-soft);
   color: var(--mk-muted);
 }
-.mk-pill--green {
+.mk-pill.mk-pill--green {
   background: var(--accent-wash);
   color: var(--accent);
 }
-.mk-pill--amber {
+.mk-pill.mk-pill--amber {
   background: var(--mk-amber-wash);
   color: var(--mk-amber);
 }
-.mk-pill--dark {
+.mk-pill.mk-pill--dark {
   background: #1d1d1f;
   color: #fff;
 }
@@ -444,7 +444,7 @@
   text-overflow: ellipsis;
 }
 .mk-event small {
-  color: color-mix(in srgb, var(--accent) 75%, #fff);
+  color: var(--accent);
 }
 .mk-event--grey {
   background: var(--mk-soft);
@@ -460,7 +460,7 @@
   box-shadow: 0 6px 14px -6px color-mix(in srgb, var(--accent) 60%, transparent);
 }
 .mk-event--solid small {
-  color: rgba(255, 255, 255, 0.8);
+  color: #fff;
 }
 
 /* Job detail */
@@ -690,4 +690,11 @@
   color: #fff;
   font-weight: 600;
   text-align: center;
+}
+
+.mk-app--tablet {
+  font-size: 1.75cqw;
+}
+.mk-job.is-on small {
+  color: var(--accent);
 }

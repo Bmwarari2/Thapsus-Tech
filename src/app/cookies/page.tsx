@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { LegalDocument } from "@/components/legal/LegalDocument";
 import { isPlaceholder, site } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Cookie policy",
-  description: `The cookies ${site.legal.tradingName} uses on its website, what each one does and how you can change your cookie settings at any time.`,
-  alternates: { canonical: "/cookies" },
-};
+  description:
+    `The cookies ${site.legal.tradingName} uses on its website, what each one does and how you can change your cookie settings at any time.`,
+  path: "/cookies",
+});
 
 const { contact, legal } = site;
 const host = site.url.replace(/^https?:\/\//, "");
@@ -142,9 +144,9 @@ export default function CookiesPage() {
         </button>
       </p>
       <p>
-        If you withdraw your consent, optional cookies will not be set from then on. You can delete cookies that have
-        already been set in your browser settings. [CONSENT WITHDRAWAL — confirm whether the site deletes analytics
-        cookies automatically when consent is withdrawn, and update this paragraph if so.]
+        If you withdraw your consent to analytics cookies, our site deletes the Google Analytics cookies it can reach and
+        reloads the page so analytics stops straight away. Optional cookies will not be set from then on. Cookies set by
+        Cal.com inside the booking calendar can be removed in your browser settings.
       </p>
       <p>
         Most browsers also let you block or delete cookies, and your browser’s help pages explain how. If you block all

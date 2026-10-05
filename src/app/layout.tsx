@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { MotionProvider } from "@/components/motion/MotionProvider";
+import { ConsentProvider } from "@/components/consent/ConsentProvider";
 import { JsonLd, organisationJsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/config/site";
 import "./globals.css";
@@ -29,6 +30,8 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: site.locale,
     url: "/",
+    title: "Thapsus · Custom software built around your business",
+    description: site.description,
   },
   twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false },
@@ -57,11 +60,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body>
         <MotionProvider>
-          <SiteHeader />
-          <main id="main" tabIndex={-1} className="outline-none">
-            {children}
-          </main>
-          <SiteFooter />
+          <ConsentProvider>
+            <SiteHeader />
+            <main id="main" tabIndex={-1} className="outline-none">
+              {children}
+            </main>
+            <SiteFooter />
+          </ConsentProvider>
         </MotionProvider>
         <JsonLd data={organisationJsonLd()} />
       </body>

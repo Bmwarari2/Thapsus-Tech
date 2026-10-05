@@ -144,7 +144,7 @@ export function Calculator() {
                       </label>
                     )}
                   </div>
-                  <div className={`mt-3 flex items-center gap-1.5 pl-8 text-[15px] ${tool.selected ? "" : "opacity-50"}`}>
+                  <div className="mt-3 flex items-center gap-1.5 pl-8 text-[15px]">
                     <span className="text-graphite">£</span>
                     <label htmlFor={priceId} className="sr-only">
                       Price per person per month for {tool.name || "this tool"}
@@ -158,7 +158,7 @@ export function Calculator() {
                       value={Number.isFinite(tool.pricePerUser) ? tool.pricePerUser : ""}
                       disabled={!tool.selected}
                       onChange={(e) => update(tool.id, { pricePerUser: e.target.value === "" ? 0 : Number(e.target.value) })}
-                      className="tabular w-16 rounded-lg bg-mist px-2 py-1 font-semibold [appearance:textfield] disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none"
+                      className="tabular w-16 rounded-lg bg-mist px-2 py-1 font-semibold [appearance:textfield] disabled:cursor-not-allowed disabled:font-normal disabled:text-graphite [&::-webkit-inner-spin-button]:appearance-none"
                     />
                     <span className="text-graphite">per person / month</span>
                   </div>

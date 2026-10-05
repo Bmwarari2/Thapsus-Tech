@@ -20,7 +20,7 @@ export function organisationJsonLd() {
     legalName: legal.companyName,
     url: site.url,
     logo: `${site.url}/brand/thapsus-mark.png`,
-    image: `${site.url}/opengraph-image`,
+    image: `${site.url}/opengraph-image.png`,
     description: site.description,
     telephone: contact.phoneHref,
     ...(isPlaceholder(contact.email) ? {} : { email: contact.email }),

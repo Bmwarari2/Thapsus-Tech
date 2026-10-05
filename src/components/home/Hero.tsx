@@ -23,7 +23,7 @@ export function Hero() {
           <h1 id="hero-title" className="t-display mx-auto mt-4 max-w-[11em] text-balance md:mt-5">
             {HEADLINE.map((word, i) => (
               <span key={word}>
-                <span className="rise inline-block" style={delay(140 + i * 90)}>
+                <span className="rise-soft inline-block" style={delay(80 + i * 90)}>
                   {word}
                 </span>
                 {i < HEADLINE.length - 1 ? " " : null}

@@ -96,7 +96,7 @@ export function PinnedStory({ items, screens }: { items: StoryItem[]; screens: R
   };
 
   return (
-    <div ref={ref} className="scrolly-pinned">
+    <div ref={ref}>
       <div data-pin className="relative h-svh pt-[var(--nav-height)]">
         <div className="wrap-wide grid h-full grid-cols-12 items-center gap-8">
           <div className="col-span-4 xl:col-span-4 xl:pl-6">
@@ -114,7 +114,7 @@ export function PinnedStory({ items, screens }: { items: StoryItem[]; screens: R
                   </h3>
                   <p className="t-lead mt-4 max-w-[22em] text-night-text">{tool.text}</p>
                   <LinkMore href={tool.href} className="mt-6 inline-block">
-                    Learn more
+                    Learn more<span className="sr-only"> about {tool.eyebrow.toLowerCase()}</span>
                   </LinkMore>
                 </div>
               ))}
@@ -132,7 +132,10 @@ export function PinnedStory({ items, screens }: { items: StoryItem[]; screens: R
                       aria-hidden="true"
                       className="h-[2px] w-4 origin-left rounded-full bg-[#48484a] transition-[transform,background-color] duration-500 ease-[var(--ease-out-expo)] group-data-[active=true]:scale-x-[2.5] group-data-[active=true]:bg-accent-on-dark"
                     />
-                    <span className="ml-5">{tool.eyebrow}</span>
+                    <span className="ml-5">
+                      <span className="sr-only">Show </span>
+                      {tool.eyebrow}
+                    </span>
                   </button>
                 </li>
               ))}

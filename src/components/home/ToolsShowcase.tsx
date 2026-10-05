@@ -3,6 +3,7 @@ import { ScreenById, type ScreenId } from "@/components/mockups/ScreenById";
 import { LinkMore } from "@/components/ui/Button";
 import { showcaseTools } from "@/content/tools";
 import { PinnedStory } from "./PinnedStory";
+import { ShowcaseSwitch } from "./ShowcaseSwitch";
 
 export function ToolsShowcase() {
   return (
@@ -19,15 +20,17 @@ export function ToolsShowcase() {
         </p>
       </div>
 
-      <PinnedStory
-        items={showcaseTools.map(({ id, eyebrow, title, text, href }) => ({ id, eyebrow, title, text, href }))}
-        screens={showcaseTools.map((tool) => (
-          <ScreenById key={tool.id} id={tool.screen as ScreenId} />
-        ))}
+      <ShowcaseSwitch
+        pinned={
+          <PinnedStory
+            items={showcaseTools.map(({ id, eyebrow, title, text, href }) => ({ id, eyebrow, title, text, href }))}
+            screens={showcaseTools.map((tool) => (
+              <ScreenById key={tool.id} id={tool.screen as ScreenId} />
+            ))}
+          />
+        }
+        stacked={<StackedStory />}
       />
-      <StackedStory />
-
-      <p className="scrolly-stacked wrap t-caption pt-8 text-center text-night-text">Screens show sample data.</p>
       <div className="pb-24 md:pb-36" />
     </section>
   );
@@ -44,7 +47,7 @@ function StackedStory() {
             <h3 className="t-title mt-3">{tool.title}</h3>
             <p className="t-lead mt-4 text-night-text">{tool.text}</p>
             <LinkMore href={tool.href} className="mt-5 inline-block">
-              Learn more
+              Learn more<span className="sr-only"> about {tool.eyebrow.toLowerCase()}</span>
             </LinkMore>
           </div>
           <div data-reveal className="relative mx-auto mt-10 max-w-[880px]">
@@ -55,6 +58,7 @@ function StackedStory() {
           </div>
         </article>
       ))}
+      <p className="t-caption pt-8 text-center text-night-text">Screens show sample data.</p>
     </div>
   );
 }

@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 import { LegalDocument } from "@/components/legal/LegalDocument";
 import { isPlaceholder, site } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy policy",
-  description: `How ${site.legal.tradingName} collects, uses and protects personal information when you visit our website, send an enquiry or book a call, and the rights you have under UK data protection law.`,
-  alternates: { canonical: "/privacy" },
-};
+  description:
+    `How ${site.legal.tradingName} collects, uses and protects personal information when you visit our website, send an enquiry or book a call, and the rights you have under UK data protection law.`,
+  path: "/privacy",
+});
 
 const { contact, legal } = site;
 const host = site.url.replace(/^https?:\/\//, "");
@@ -80,8 +82,7 @@ export default function PrivacyPage() {
         <li>which software you currently pay for, and roughly how much you spend on software each month (as a range)</li>
         <li>your message</li>
         <li>
-          a tick box confirming [CONSENT CHECKBOX WORDING — confirm it matches the form, e.g. that you are happy for us to
-          contact you about your enquiry]
+          a tick box confirming that you are happy for us to contact you about your enquiry
         </li>
       </ul>
       <p>
