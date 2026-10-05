@@ -9,13 +9,14 @@ type Props<T extends string> = {
   /** Sidebar items; defaults to the general business app menu. */
   items?: readonly T[];
   brand?: string;
+  dark?: boolean;
 };
 
 /** Shared sidebar + content frame for laptop app screens. */
-export function AppShell<T extends string = NavItem>({ active, children, items, brand = "Your business" }: Props<T>) {
+export function AppShell<T extends string = NavItem>({ active, children, items, brand = "Your business", dark = false }: Props<T>) {
   const menu = (items ?? NAV_ITEMS) as readonly string[];
   return (
-    <div className="mk-app">
+    <div className={`mk-app ${dark ? "mk-app--dark" : ""}`}>
       <aside className="mk-side">
         <div className="mk-brand">
           <i />

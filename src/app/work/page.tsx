@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { FinalCta } from "@/components/home/FinalCta";
 import { PageIntro } from "@/components/layout/PageIntro";
-import { Laptop } from "@/components/devices/Devices";
-import { ScreenChurchFollowUp, ScreenExportERP, ScreenTenderERP } from "@/components/mockups/CaseStudyScreens";
+import { caseStudyVisuals } from "@/components/mockups/CaseStudyVisuals";
 import { Icon } from "@/components/ui/Icon";
-import { caseStudies, type CaseStudy } from "@/content/work";
+import { caseStudies } from "@/content/work";
 import { approvedTestimonials } from "@/content/testimonials";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -14,12 +13,6 @@ export const metadata: Metadata = pageMetadata({
     "Systems Thapsus has built: a sourcing and export ERP for Heritage Global Solutions, a tender and trade ERP for Cebuka, and a discipleship system for Potter’s House Church.",
   path: "/work",
 });
-
-const visuals: Record<CaseStudy["visual"], () => React.JSX.Element> = {
-  "export-erp": ScreenExportERP,
-  "tender-erp": ScreenTenderERP,
-  church: ScreenChurchFollowUp,
-};
 
 export default function WorkPage() {
   return (
@@ -31,7 +24,7 @@ export default function WorkPage() {
       />
 
       {caseStudies.map((study, i) => {
-        const Screen = visuals[study.visual];
+        const Visual = caseStudyVisuals[study.visual];
         const quote = approvedTestimonials.find((t) => t.caseStudy === study.id);
         const tone = i % 2 === 0 ? "bg-mist" : "bg-white";
         const tile = i % 2 === 0 ? "bg-white" : "bg-mist";
@@ -66,9 +59,7 @@ export default function WorkPage() {
 
               <div className="relative mx-auto mt-14 max-w-[980px] md:mt-20" data-reveal>
                 <div className="dv-glow" />
-                <Laptop label={`Illustration of the ${study.type.toLowerCase()} built for ${study.client}, using sample data`}>
-                  <Screen />
-                </Laptop>
+                <Visual />
                 <p className="t-caption mt-6 text-center text-graphite">Illustration based on the real workflow, with sample data.</p>
               </div>
 

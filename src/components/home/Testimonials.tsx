@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { caseStudyVisuals } from "@/components/mockups/CaseStudyVisuals";
 import { approvedTestimonials } from "@/content/testimonials";
 import { caseStudies } from "@/content/work";
 
@@ -49,24 +50,32 @@ export function Testimonials() {
           </h2>
         </div>
         <ul className="mt-14 grid gap-4 md:mt-20 md:grid-cols-3 md:gap-5">
-          {caseStudies.map((study, i) => (
-            <li key={study.id} data-reveal>
-              <Link
-                href={`/work#${study.id}`}
-                className={`group flex h-full min-h-[320px] flex-col rounded-[var(--radius-tile)] p-8 transition-transform duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 md:p-10 ${
-                  i === 1 ? "on-dark bg-black text-white" : "bg-mist"
-                }`}
-              >
-                <span className={`text-[15px] font-semibold ${i === 1 ? "text-accent-on-dark" : "text-accent"}`}>{study.type}</span>
-                <span className="mt-2 block text-[28px] font-bold leading-[1.1] tracking-[-0.025em]">{study.client}</span>
-                <span className={`mt-3 block text-[17px] leading-[1.45] ${i === 1 ? "text-night-text" : "text-graphite"}`}>{study.headline}</span>
-                <span className={`mt-auto pt-8 text-[15px] ${i === 1 ? "text-night-text" : "text-graphite"}`}>
-                  {study.sector} · {study.location}
-                </span>
-                <span className="link-more mt-3 text-[15px]">Read the case study</span>
-              </Link>
-            </li>
-          ))}
+          {caseStudies.map((study, i) => {
+            const Visual = caseStudyVisuals[study.visual];
+            return (
+              <li key={study.id} data-reveal>
+                <Link
+                  href={`/work#${study.id}`}
+                  className={`group flex h-full flex-col overflow-hidden rounded-[var(--radius-tile)] p-8 transition-transform duration-500 ease-[var(--ease-out-expo)] hover:-translate-y-1 md:p-10 ${
+                    i === 1 ? "on-dark bg-black text-white" : "bg-mist"
+                  }`}
+                >
+                  <div className="pointer-events-none mb-8 flex aspect-[16/11] items-center">
+                    <div className="w-full">
+                      <Visual decorative />
+                    </div>
+                  </div>
+                  <span className={`text-[15px] font-semibold ${i === 1 ? "text-accent-on-dark" : "text-accent"}`}>{study.type}</span>
+                  <span className="mt-2 block text-[28px] font-bold leading-[1.1] tracking-[-0.025em]">{study.client}</span>
+                  <span className={`mt-3 block text-[17px] leading-[1.45] ${i === 1 ? "text-night-text" : "text-graphite"}`}>{study.headline}</span>
+                  <span className={`mt-auto pt-8 text-[15px] ${i === 1 ? "text-night-text" : "text-graphite"}`}>
+                    {study.sector} · {study.location}
+                  </span>
+                  <span className="link-more mt-3 text-[15px]">Read the case study</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </section>
