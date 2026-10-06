@@ -43,7 +43,7 @@ These are stated on the site as fact, based on your answers. Please double-check
 ## 6. Work: case studies (`src/content/work.ts`)
 
 - [x] Heritage Global Solutions (ERP), Cebuka (tender and trade ERP) and Potter’s House Church (discipleship) are written up from the systems themselves.
-- [ ] **Cebuka or Hadari?** The Cebuka system was renamed **Hadari** in August. Change `client` in `src/content/work.ts` (and `name` in `src/content/testimonials.ts`) if the client now trades as Hadari.
+- [x] **Client name:** confirmed as **Cebuka** (not Hadari, the name used inside their system).
 - [ ] The screens are illustrations based on each real workflow, using sample data. Swap in real screenshots if the clients agree.
 
 ## 7. Testimonials (`src/content/testimonials.ts`)
