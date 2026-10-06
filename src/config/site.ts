@@ -71,47 +71,68 @@ export const site = {
   },
 
   /**
-   * Pricing. All prices exclude VAT. While `isPlaceholder` is true, the site
-   * shows "£[X]" instead of the numbers below and labels the calculator as
-   * using sample figures.
+   * Pricing. All prices exclude VAT. A plan's monthly price is its team fee
+   * (set by how many people log in) plus `toolFee` for each tool.
+   * While `isPlaceholder` is true, the site shows "£[X]" instead of the
+   * numbers below and labels the calculator as using sample figures.
    */
   pricing: {
     isPlaceholder: false,
-    /** Paid when the client signs their proposal (Starter and Growth). */
+    /** Paid when the client signs their proposal. */
     startFee: 200,
+    /** Monthly price of each tool, on top of the team fee. */
+    toolFee: 39,
+    /** Most tools on a standard plan. More than this is a custom quote. */
+    maxTools: 5,
+    /** Included improvement time each month, per tool. */
+    improvementMinutesPerTool: 30,
     /** Monthly fees start at go-live and run for at least this many months. */
     minimumTermMonths: 12,
     /** Discount on the monthly fee for charities and churches. 0 hides the line. */
     charityDiscountPercent: 10,
     plans: [
       {
+        id: "essentials",
+        name: "Essentials",
+        summary: "Our ready-made tools, set up for a small team.",
+        teamFee: 110,
+        users: 5,
+        supportHours: "working hours, 24/7 for emergencies",
+        features: ["Ready-made tools with your branding and settings", "Hosting, backups and security updates", "Email support"],
+      },
+      {
         id: "starter",
         name: "Starter",
-        summary: "One focused tool for a small team.",
-        monthlyFee: 249,
+        summary: "Tools shaped around how a small team works.",
+        teamFee: 170,
         users: 10,
-        /** The most subscriptions the savings calculator lets this plan replace. */
-        replacesUpTo: 2,
         supportHours: "working hours, 24/7 for emergencies",
-        features: ["One core tool", "1 hour of improvements a month", "Hosting, backups and security updates", "Email support"],
+        features: ["Built around how you work", "Hosting, backups and security updates", "Email support"],
+      },
+      {
+        id: "team",
+        name: "Team",
+        summary: "Connected tools for a growing team.",
+        teamFee: 230,
+        users: 20,
+        supportHours: "working hours, 24/7 for emergencies",
+        features: ["Built around how you work", "Hosting, backups and security updates", "Priority phone and email support"],
       },
       {
         id: "growth",
         name: "Growth",
-        summary: "Several connected tools, one system.",
-        monthlyFee: 495,
+        summary: "One connected system for a bigger team.",
+        teamFee: 290,
         users: 30,
-        replacesUpTo: 5,
         supportHours: "working hours, 24/7 for emergencies",
-        features: ["Up to 5 connected tools", "3 hours of improvements a month", "Hosting, backups and security updates", "Priority phone and email support"],
+        features: ["Built around how you work", "Hosting, backups and security updates", "Priority phone and email support"],
       },
       {
         id: "custom",
         name: "Custom",
-        summary: "Larger teams and bigger systems, including ERP.",
-        monthlyFee: null,
+        summary: "More than 30 people or 5 tools, and bigger systems including ERP.",
+        teamFee: null,
         users: null,
-        replacesUpTo: null,
         supportHours: "Agreed with you",
         features: ["Unlimited scope, quoted to fit", "Setup paid in stages", "Dedicated support arrangement", "Data migration from multiple systems", "Code handover option"],
       },
@@ -122,8 +143,8 @@ export const site = {
    * Savings calculator. Tool prices are monthly examples, excluding VAT, that
    * visitors can edit. `unit: "user"` is per person (and visitors can say how
    * many people use it); `unit: "flat"` is one price for the whole account.
-   * The Thapsus cost uses the cheapest plan above that covers both the team
-   * size and the number of tools ticked.
+   * The Thapsus cost uses the smallest plan that covers the number of people,
+   * plus the tool fee for each tool ticked.
    */
   calculator: {
     defaultStaff: 20,

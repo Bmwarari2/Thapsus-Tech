@@ -11,18 +11,24 @@ export type ToolInput = {
   selected: boolean;
 };
 
-type PricedPlan = { id: string; name: string; monthlyFee: number; users: number; replacesUpTo: number };
+type PricedPlan = { id: string; name: string; teamFee: number; users: number };
+
+const { startFee, toolFee, maxTools } = site.pricing;
 
 const pricedPlans: PricedPlan[] = site.pricing.plans
-  .filter((p) => p.monthlyFee !== null && p.users !== null && p.replacesUpTo !== null)
-  .map((p) => ({ id: p.id, name: p.name, monthlyFee: p.monthlyFee!, users: p.users!, replacesUpTo: p.replacesUpTo! }))
-  .sort((a, b) => a.monthlyFee - b.monthlyFee);
+  .filter((p) => p.teamFee !== null && p.users !== null)
+  .map((p) => ({ id: p.id, name: p.name, teamFee: p.teamFee!, users: p.users! }))
+  .sort((a, b) => a.users - b.users);
 
 export const largestPlan = pricedPlans[pricedPlans.length - 1];
 
-/** The cheapest plan that covers the team and the tools, or null if a custom quote is needed. */
-export function pickPlan(staff: number, toolCount: number): PricedPlan | null {
-  return pricedPlans.find((p) => p.users >= staff && p.replacesUpTo >= toolCount) ?? null;
+/** Monthly price of a plan with a given number of tools. */
+export const planMonthly = (plan: { teamFee: number }, tools: number) => plan.teamFee + toolFee * Math.max(1, tools);
+
+/** The smallest plan for this many people, or null if a custom quote is needed. */
+export function pickPlan(people: number, toolCount: number): PricedPlan | null {
+  if (toolCount > maxTools) return null;
+  return pricedPlans.find((p) => p.users >= people) ?? null;
 }
 
 const safe = (n: number) => (Number.isFinite(n) ? Math.max(0, n) : 0);
@@ -41,6 +47,7 @@ export type Estimate = {
   currentAnnual: number;
   current3Years: number;
   plan: PricedPlan | null;
+  thapsusMonthly: number;
   thapsusYearOne: number;
   thapsusAnnualAfter: number;
   thapsus3Years: number;
@@ -56,8 +63,9 @@ export function estimate(staff: number, tools: ToolInput[]): Estimate {
   const current3Years = currentAnnual * 3;
 
   const plan = pickPlan(staff, selected.length);
-  const start = plan && site.calculator.includeStartFee ? site.pricing.startFee : 0;
-  const thapsusAnnualAfter = plan ? plan.monthlyFee * 12 : 0;
+  const start = plan && site.calculator.includeStartFee ? startFee : 0;
+  const thapsusMonthly = plan ? planMonthly(plan, selected.length) : 0;
+  const thapsusAnnualAfter = thapsusMonthly * 12;
   const thapsusYearOne = plan ? start + thapsusAnnualAfter : 0;
   const thapsus3Years = plan ? start + thapsusAnnualAfter * 3 : 0;
 
@@ -68,6 +76,7 @@ export function estimate(staff: number, tools: ToolInput[]): Estimate {
     currentAnnual,
     current3Years,
     plan,
+    thapsusMonthly,
     thapsusYearOne,
     thapsusAnnualAfter,
     thapsus3Years,

@@ -29,15 +29,19 @@ export const pricingFaq: { q: string; a: string }[] = [
   },
   {
     q: "What if we need more users?",
-    a: "Each plan includes a set number of users. If your team grows past it, you can move up a plan, or we’ll quote a custom plan. You never pay per seat.",
+    a: "Each plan covers a set number of people. If your team grows past it, you move up to the next plan, and above 30 people we’ll quote a custom plan. You never pay per seat.",
   },
   {
     q: "Who counts as a user?",
     a: "Anyone on your team who logs in. Customers, members and volunteers who use a portal, booking page or check-in don’t count, within fair use.",
   },
   {
+    q: "What counts as a tool?",
+    a: "One part of your system, such as a CRM, booking or job management. Each tool is £39 a month on top of your plan. Reports, dashboards and forms inside a tool don’t count as extra tools.",
+  },
+  {
     q: "What if we want more changes than the plan includes?",
-    a: "Fixing anything that isn’t working as agreed is always free. Starter includes 1 hour of improvements a month and Growth includes 3. For bigger changes, we’ll give you a fixed quote before any work starts.",
+    a: "Fixing anything that isn’t working as agreed is always free. Every plan also includes 30 minutes of improvements a month for each tool you have. For bigger changes, we’ll give you a fixed quote before any work starts.",
   },
   {
     q: "Do you work outside Greater Manchester?",

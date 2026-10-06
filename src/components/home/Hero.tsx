@@ -32,7 +32,7 @@ export function Hero() {
           </h1>
 
           <p className="t-lead rise mx-auto mt-5 max-w-[30em] text-graphite md:mt-6" style={delay(560)}>
-            Custom software for less than you pay in subscriptions.
+            Custom software, often for less than you pay in subscriptions.
           </p>
 
           <div

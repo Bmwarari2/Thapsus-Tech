@@ -7,7 +7,7 @@ import { site } from "@/config/site";
 import { defaultTools, estimate, formatGBP, largestPlan, type ToolInput } from "@/lib/savings";
 
 const { minStaff, maxStaff, defaultStaff, includeStartFee } = site.calculator;
-const { startFee } = site.pricing;
+const { startFee, maxTools } = site.pricing;
 const clampStaff = (n: number) => Math.min(maxStaff, Math.max(minStaff, Math.round(n) || minStaff));
 
 type Tool = ToolInput & { custom?: boolean };
@@ -36,7 +36,7 @@ export function Calculator() {
   const customReason =
     staff > largestPlan.users
       ? `For teams over ${largestPlan.users} people, we’ll price a plan around what you need.`
-      : `To replace more than ${largestPlan.replacesUpTo} tools, we’ll price a plan around what you need.`;
+      : `To replace more than ${maxTools} tools, we’ll price a plan around what you need.`;
 
   const costNote = !plan
     ? ""
@@ -61,7 +61,8 @@ export function Calculator() {
         <fieldset className="min-w-0 rounded-[var(--radius-tile)] bg-mist p-5 sm:p-6 md:p-9">
           <legend className="float-left w-full">
             <span className="block text-[14px] font-semibold text-graphite">Step 1</span>
-            <span className="t-tile mt-1 block">How many people are in your team?</span>
+            <span className="t-tile mt-1 block">How many people use your software?</span>
+            <span className="mt-2 block text-[15px] text-graphite">Count everyone on your team who logs in. Customers and volunteers don’t count.</span>
           </legend>
           <div className="clear-both flex flex-wrap items-center gap-x-3 gap-y-2 pt-7 sm:gap-x-4">
             <button
@@ -261,8 +262,8 @@ export function Calculator() {
                     <span className="ml-1.5 text-[17px] font-medium tracking-normal text-night-text">in year one</span>
                   </dd>
                   <dd className="mt-1 text-[14px] text-night-text">
-                    {plan.name} plan, up to {plan.users} people · {formatGBP(startFee)} to start, then {formatGBP(plan.monthlyFee)} a
-                    month
+                    {plan.name} plan, up to {plan.users} people, {result.toolCount} {result.toolCount === 1 ? "tool" : "tools"} ·{" "}
+                    {formatGBP(startFee)} to start, then {formatGBP(result.thapsusMonthly)} a month
                   </dd>
                 </>
               ) : (

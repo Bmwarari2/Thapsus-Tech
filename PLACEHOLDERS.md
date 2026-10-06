@@ -8,10 +8,10 @@ Everything below is either shown on the site in `[SQUARE BRACKETS]` or needs con
 - [ ] **ICO registration number** (`legal.icoNumber`): shown in the privacy policy. Leave it as an empty string `""` to hide it.
 - [x] **Cal.com booking link** (`booking.calLink`): set to `thapsusadmin/30min`. Change it to `thapsusadmin/15min`, or `thapsusadmin` to let visitors choose.
 - [ ] **Google Analytics 4 ID** (`analytics.gaMeasurementId`), e.g. `G-XXXXXXX`. Leave it empty if you don't want analytics.
-- [x] **Prices** (from the Thapsus Pricing Pack, 6 Oct 2026): £200 to start; Starter £249 a month (10 users, 1 hour of improvements); Growth £495 a month (30 users, up to 5 tools, 3 hours). All exclude VAT. 12-month minimum term from go-live; 10% off the monthly fee for charities and churches.
+- [x] **Prices** (approved 6 Oct 2026): £200 to start, then a team fee plus £39 a month per tool (up to 5 tools). Team fees: Essentials (up to 5 people, standard setup) £110, Starter (up to 10) £170, Team (up to 20) £230, Growth (up to 30) £290. More than 30 people or 5 tools is Custom. All exclude VAT; 12-month minimum term from go-live; 10% off the monthly fee for charities and churches; 30 minutes of improvements a month per tool.
 - [x] **`pricing.isPlaceholder`** is `false`, so real prices show and the "Sample prices" labels are gone.
-- [x] **Calculator** follows the pricing pack: it picks the plan by team size *and* tools ticked, lets visitors say how many people use each per-person tool, treats forms, client portal and stock as flat monthly prices, and says plainly when Thapsus would cost more.
-- [ ] **Prices repeated in the FAQ** (`src/content/faq.ts`: £200 start, 12-month term, 1 and 3 improvement hours) are typed out. Update them if the settings change.
+- [x] **Calculator** picks the smallest plan for the number of people who log in, adds the tool fee for each tool ticked, lets visitors say how many people use each per-person tool, treats forms, client portal and stock as flat monthly prices, and says plainly when Thapsus would cost more.
+- [ ] **Prices repeated in the FAQ** (`src/content/faq.ts`: £200 start, £39 per tool, 12-month term, 30 minutes per tool) are typed out. Update them if the settings change.
 
 ## 2. Hosting and email (Railway variables)
 

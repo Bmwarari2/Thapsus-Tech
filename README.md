@@ -51,12 +51,12 @@ Most of what you'll want to change lives in this one file:
 | `brand` | The accent colour (Evergreen) and its lighter and darker versions |
 | `booking.calLink` | Your Cal.com booking link, e.g. `thapsus/software-review` |
 | `analytics.gaMeasurementId` | Your Google Analytics 4 ID, e.g. `G-XXXXXXX`. Leave it empty to turn analytics off |
-| `pricing` | Start fee, minimum term, charity discount, and each plan's monthly fee, user allowance, features and how many tools it can replace in the calculator |
+| `pricing` | Start fee, tool fee, most tools per plan, improvement time, minimum term, charity discount, and each plan's team fee, number of people and features |
 | `calculator` | Default team size, the tools listed with their example prices (per person or flat), and whether the start fee is included |
 
 Anything in `[SQUARE BRACKETS]` is a placeholder.
 
-**Prices:** all prices exclude VAT. If `pricing.isPlaceholder` is set to `true`, the Pricing page shows `£[X]` and the calculator is labelled "Sample prices". The pricing FAQ in `src/content/faq.ts` repeats a few figures (£200 start, 12-month term, improvement hours), so update it too when prices change.
+**Prices:** all prices exclude VAT. If `pricing.isPlaceholder` is set to `true`, the Pricing page shows `£[X]` and the calculator is labelled "Sample prices". A plan's monthly price is its team fee plus the tool fee for each tool. The pricing FAQ in `src/content/faq.ts` repeats a few figures (£200 start, £39 per tool, 12-month term, 30 minutes per tool), so update it too when prices change.
 
 ### Page copy: `src/content/`
 
