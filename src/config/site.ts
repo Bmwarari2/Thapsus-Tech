@@ -13,7 +13,7 @@
 export const site = {
   name: "Thapsus",
   /** Live web address, no trailing slash. Used for SEO, sitemap and social cards. */
-  url: "https://tech.thapsus.uk",
+  url: "https://app.thapsus.uk",
   locale: "en_GB",
 
   /** Default search/social description. Each page also sets its own. */

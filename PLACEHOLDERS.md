@@ -18,7 +18,7 @@ Everything below is either shown on the site in `[SQUARE BRACKETS]` or needs con
 - [x] `RESEND_API_KEY`: set in Railway. The enquiry form is live and tested.
 - [x] `CONTACT_TO_EMAIL`: optional. Enquiries go to `admin@thapsus.uk` (from `contact.email`) unless this is set.
 - [x] `CONTACT_FROM_EMAIL`: set in Railway (domain verified in Resend).
-- [ ] Custom domain `tech.thapsus.uk`: add the CNAME record Railway gives you.
+- [ ] Custom domain `app.thapsus.uk`: add the CNAME (`app` → `f3sebe1k.up.railway.app`) and TXT (`_railway-verify.app`) records in Cloudflare. `tech.thapsus.uk` stays attached and redirects to it.
 
 ## 3. Claims to confirm are true
 

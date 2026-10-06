@@ -2,7 +2,7 @@
 
 The marketing website for **Thapsus**: custom software for UK businesses, built in Stockport.
 
-- **Live address (planned):** https://tech.thapsus.uk
+- **Live address:** https://app.thapsus.uk (the old address, tech.thapsus.uk, redirects here)
 - **Stack:** Next.js 16 (App Router, TypeScript) · Tailwind CSS 4 · GSAP + ScrollTrigger · Lenis smooth scrolling
 - **Hosting:** Railway (Vercel and Netlify also work, see below)
 
@@ -162,7 +162,7 @@ The repository includes `railway.json`, so Railway knows how to build and start 
 2. Railway detects Next.js, runs `npm ci` and `npm run build`, then starts the site with `npm run start`. The site listens on the `PORT` Railway provides.
 3. Add the email variables from section 3 under **Variables**.
 4. Under **Settings → Networking**, generate a Railway domain to test with.
-5. **Custom domain:** add `tech.thapsus.uk` in the same place. Railway shows a CNAME record to add at your domain provider. HTTPS is set up automatically once DNS updates.
+5. **Custom domain:** add `app.thapsus.uk` in the same place. Railway shows a CNAME record and a `_railway-verify` TXT record to add at your domain provider (Cloudflare). HTTPS is set up automatically once DNS updates. Keep `tech.thapsus.uk` attached too: `next.config.ts` redirects it to `app.thapsus.uk`, so old links keep working.
 
 Every push to the connected branch redeploys automatically.
 
@@ -177,7 +177,7 @@ Import the repository at [app.netlify.com](https://app.netlify.com). Netlify's N
 ### After going live
 
 - Check that `url` in `src/config/site.ts` matches your live address.
-- Submit `https://tech.thapsus.uk/sitemap.xml` in [Google Search Console](https://search.google.com/search-console).
+- Submit `https://app.thapsus.uk/sitemap.xml` in [Google Search Console](https://search.google.com/search-console).
 - Test your structured data with the [Rich Results Test](https://search.google.com/test/rich-results).
 
 ---
