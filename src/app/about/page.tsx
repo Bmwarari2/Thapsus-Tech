@@ -21,7 +21,7 @@ const values: { icon: IconName; title: string; text: string }[] = [
   {
     icon: "users",
     title: "Fair pricing",
-    text: "A fixed setup fee and one monthly fee. No per-seat charges and no surprise invoices.",
+    text: "£200 to start, then one monthly fee. No per-seat charges and no surprise invoices.",
   },
   {
     icon: "forms",

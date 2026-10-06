@@ -14,13 +14,14 @@ import { formatGBP } from "@/lib/savings";
 export const metadata: Metadata = pageMetadata({
   title: "Pricing",
   description:
-    "A one-off setup fee and one monthly fee covering hosting, support, security and improvements. Priced per plan, not per seat. See what you could save.",
+    "£200 to start, then one monthly fee covering hosting, support, security and improvements. Priced per plan, not per seat. See what you could save.",
   path: "/pricing",
 });
 
 const placeholder = site.pricing.isPlaceholder;
 const money = (n: number | null) => (n === null ? null : placeholder ? "£[X]" : formatGBP(n));
 const people = (n: number | null) => (n === null ? null : placeholder ? "[X]" : String(n));
+const { startFee, minimumTermMonths, charityDiscountPercent } = site.pricing;
 
 export default function PricingPage() {
   return (
@@ -36,16 +37,16 @@ export default function PricingPage() {
       />
       <PageIntro
         title="Simple, fair pricing."
-        lead="A one-off fee to build your system. Then one monthly fee for hosting, support, security and improvements."
+        lead={`${money(startFee)} to start, and nothing more until your system is live. Then one monthly fee for hosting, support, security and improvements.`}
       />
 
       {/* The model */}
       <section id="model" aria-label="How pricing works" className="scroll-mt-[120px] bg-white pb-24 md:pb-36">
         <div className="wrap grid gap-4 md:grid-cols-2 md:gap-5">
           <div className="rounded-[var(--radius-tile)] bg-mist p-8 md:p-12" data-reveal>
-            <p className="text-[15px] font-semibold text-accent">Once</p>
-            <h2 className="t-title mt-2">Setup fee</h2>
-            <p className="t-lead mt-4 text-graphite">Fixed before we start.</p>
+            <p className="text-[15px] font-semibold text-accent">To start</p>
+            <h2 className="t-title tabular mt-2">{money(startFee)}</h2>
+            <p className="t-lead mt-4 text-graphite">Then nothing more to pay until your system is live.</p>
             <ul className="mt-8 grid gap-2.5">
               {["Your free software review", "Design and build", "Moving your data across", "Training for your team"].map((f) => (
                 <li key={f} className="flex gap-3 text-[17px]">
@@ -56,9 +57,9 @@ export default function PricingPage() {
             </ul>
           </div>
           <div className="on-dark rounded-[var(--radius-tile)] bg-black p-8 text-white md:p-12" data-reveal>
-            <p className="text-[15px] font-semibold text-accent-on-dark">Every month</p>
+            <p className="text-[15px] font-semibold text-accent-on-dark">Every month, from go-live</p>
             <h2 className="t-title mt-2">One monthly fee</h2>
-            <p className="t-lead mt-4 text-night-text">Usually less than the subscriptions it replaces.</p>
+            <p className="t-lead mt-4 text-night-text">Often less than the subscriptions it replaces.</p>
             <ul className="mt-8 grid gap-2.5">
               {["UK hosting and monitoring", "Daily backups", "Security updates", "Support and fixes", "Ongoing improvements"].map((f) => (
                 <li key={f} className="flex gap-3 text-[17px]">
@@ -156,10 +157,10 @@ export default function PricingPage() {
                       <>
                         <p className="tabular text-[40px] font-bold leading-none tracking-[-0.035em]">
                           {money(plan.monthlyFee)}
-                          <span className={`ml-1.5 text-[17px] font-medium tracking-normal ${dark ? "text-night-text" : "text-graphite"}`}>a month</span>
+                          <span className={`ml-1.5 text-[17px] font-medium tracking-normal ${dark ? "text-night-text" : "text-graphite"}`}>+ VAT a month</span>
                         </p>
                         <p className={`tabular mt-3 text-[17px] ${dark ? "text-night-text" : "text-graphite"}`}>
-                          plus {money(plan.setupFee)} one-off setup
+                          plus {money(startFee)} to start
                         </p>
                       </>
                     )}
@@ -186,8 +187,11 @@ export default function PricingPage() {
               );
             })}
           </ul>
-          <p className="t-caption mt-8 text-center text-graphite">
-            {placeholder ? "Prices to be confirmed. " : ""}Final prices, including any VAT, are fixed in your written proposal.
+          <p className="t-caption mx-auto mt-8 max-w-[44em] text-center text-graphite">
+            {placeholder ? "Prices to be confirmed. " : ""}All prices exclude VAT. Monthly fees start when your system goes live, with a{" "}
+            {minimumTermMonths}-month minimum term.
+            {charityDiscountPercent ? ` Charities and churches get ${charityDiscountPercent}% off the monthly fee.` : ""} Your exact price is fixed in
+            your written proposal.
           </p>
         </div>
       </section>

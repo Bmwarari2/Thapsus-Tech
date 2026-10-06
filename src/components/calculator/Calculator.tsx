@@ -4,30 +4,55 @@ import { useId, useMemo, useState } from "react";
 import { ButtonLink } from "@/components/ui/Button";
 import { AnimatedNumber } from "@/components/ui/Numbers";
 import { site } from "@/config/site";
-import { estimate, formatGBP, largestPlanUsers, type ToolInput } from "@/lib/savings";
+import { defaultTools, estimate, formatGBP, largestPlan, type ToolInput } from "@/lib/savings";
 
-const { minStaff, maxStaff, defaultStaff } = site.calculator;
+const { minStaff, maxStaff, defaultStaff, includeStartFee } = site.calculator;
+const { startFee } = site.pricing;
 const clampStaff = (n: number) => Math.min(maxStaff, Math.max(minStaff, Math.round(n) || minStaff));
 
 type Tool = ToolInput & { custom?: boolean };
 
+const numberInput =
+  "tabular w-16 rounded-lg bg-mist px-2 py-1 font-semibold [appearance:textfield] disabled:cursor-not-allowed disabled:font-normal disabled:text-graphite [&::-webkit-inner-spin-button]:appearance-none";
+
 export function Calculator() {
   const uid = useId();
   const [staff, setStaff] = useState<number>(defaultStaff);
-  const [tools, setTools] = useState<Tool[]>(() => site.calculator.tools.map((t) => ({ ...t })));
+  const [tools, setTools] = useState<Tool[]>(defaultTools);
   const result = useMemo(() => estimate(staff, tools), [staff, tools]);
 
   const update = (id: string, patch: Partial<Tool>) => setTools((list) => list.map((t) => (t.id === id ? { ...t, ...patch } : t)));
   const addTool = () =>
-    setTools((list) => [...list, { id: `custom-${list.length}-${Date.now()}`, name: "", pricePerUser: 10, selected: true, custom: true }]);
+    setTools((list) => [
+      ...list,
+      { id: `custom-${list.length}-${Date.now()}`, name: "", price: 10, unit: "user", users: null, selected: true, custom: true },
+    ]);
   const removeTool = (id: string) => setTools((list) => list.filter((t) => t.id !== id));
 
   const { plan } = result;
-  const negativeYearOne = plan && result.savingYearOne < 0;
+  const noTools = result.toolCount === 0;
+  const costsMoreYearOne = result.savingYearOne < 0;
+  const costsMore3Years = result.saving3Years < 0;
+  const customReason =
+    staff > largestPlan.users
+      ? `For teams over ${largestPlan.users} people, we’ll price a plan around what you need.`
+      : `To replace more than ${largestPlan.replacesUpTo} tools, we’ll price a plan around what you need.`;
 
-  const liveSummary = plan
-    ? `You pay about ${formatGBP(result.currentAnnual)} a year now. With Thapsus, about ${formatGBP(result.thapsusYearOne)} in year one. Estimated saving over three years: ${formatGBP(result.saving3Years)}.`
-    : `You pay about ${formatGBP(result.currentAnnual)} a year now. For a team of ${staff}, we’d quote a custom plan.`;
+  const costNote = !plan
+    ? ""
+    : costsMore3Years
+      ? `On these figures, Thapsus would cost ${formatGBP(-result.savingYearOne)} more in year one and ${formatGBP(-result.saving3Years)} more over three years.`
+      : costsMoreYearOne
+        ? `On these figures, Thapsus would cost ${formatGBP(-result.savingYearOne)} more in year one, then save you ${formatGBP(result.saving3Years)} over three years.`
+        : "";
+
+  const liveSummary = noTools
+    ? "Tick the tools you pay for to see an estimate."
+    : plan
+      ? `You pay about ${formatGBP(result.currentAnnual)} a year now. With Thapsus, about ${formatGBP(result.thapsusYearOne)} in year one. ${
+          costNote || `Estimated saving over three years: ${formatGBP(result.saving3Years)}.`
+        }`
+      : `You pay about ${formatGBP(result.currentAnnual)} a year now. ${customReason}`;
 
   return (
     <div className="grid gap-5 lg:grid-cols-12 lg:gap-6">
@@ -36,7 +61,7 @@ export function Calculator() {
         <fieldset className="min-w-0 rounded-[var(--radius-tile)] bg-mist p-5 sm:p-6 md:p-9">
           <legend className="float-left w-full">
             <span className="block text-[14px] font-semibold text-graphite">Step 1</span>
-            <span className="t-tile mt-1 block">How many people use your software?</span>
+            <span className="t-tile mt-1 block">How many people are in your team?</span>
           </legend>
           <div className="clear-both flex flex-wrap items-center gap-x-3 gap-y-2 pt-7 sm:gap-x-4">
             <button
@@ -93,13 +118,15 @@ export function Calculator() {
             <span className="block text-[14px] font-semibold text-graphite">Step 2</span>
             <span className="t-tile mt-1 block">Which tools do you pay for?</span>
             <span className="mt-2 block text-[15px] text-graphite">
-              Prices are per person, per month. We’ve filled in examples; change them to what you pay.
+              We’ve filled in example monthly prices, excluding VAT. Change them to what you pay.
             </span>
           </legend>
           <ul className="clear-both grid gap-3 pt-7 md:grid-cols-2">
             {tools.map((tool) => {
               const checkId = `${uid}-${tool.id}-on`;
               const priceId = `${uid}-${tool.id}-price`;
+              const usersId = `${uid}-${tool.id}-users`;
+              const perUser = tool.unit === "user";
               const nameId = `${uid}-${tool.id}-name`;
               return (
                 <li
@@ -147,7 +174,7 @@ export function Calculator() {
                   <div className="mt-3 flex items-center gap-1.5 pl-8 text-[15px]">
                     <span className="text-graphite">£</span>
                     <label htmlFor={priceId} className="sr-only">
-                      Price per person per month for {tool.name || "this tool"}
+                      {perUser ? "Price per person per month" : "Price per month"} for {tool.name || "this tool"}
                     </label>
                     <input
                       id={priceId}
@@ -155,13 +182,37 @@ export function Calculator() {
                       inputMode="decimal"
                       min={0}
                       step={0.5}
-                      value={Number.isFinite(tool.pricePerUser) ? tool.pricePerUser : ""}
+                      value={Number.isFinite(tool.price) ? tool.price : ""}
                       disabled={!tool.selected}
-                      onChange={(e) => update(tool.id, { pricePerUser: e.target.value === "" ? 0 : Number(e.target.value) })}
-                      className="tabular w-16 rounded-lg bg-mist px-2 py-1 font-semibold [appearance:textfield] disabled:cursor-not-allowed disabled:font-normal disabled:text-graphite [&::-webkit-inner-spin-button]:appearance-none"
+                      onChange={(e) => update(tool.id, { price: e.target.value === "" ? 0 : Number(e.target.value) })}
+                      className={numberInput}
                     />
-                    <span className="text-graphite">per person / month</span>
+                    <span className="text-graphite">{perUser ? "per person / month" : "a month"}</span>
                   </div>
+                  {perUser ? (
+                    <div className="mt-2 flex items-center gap-1.5 pl-8 text-[15px]">
+                      <label htmlFor={usersId} className="text-graphite">
+                        Used by
+                      </label>
+                      <input
+                        id={usersId}
+                        type="number"
+                        inputMode="numeric"
+                        min={1}
+                        max={staff}
+                        value={tool.users === 0 ? "" : Math.min(staff, tool.users ?? staff)}
+                        disabled={!tool.selected}
+                        onChange={(e) => {
+                          const n = Math.round(Number(e.target.value));
+                          // Empty while typing (0); back to following the team size once it matches or is left empty.
+                          update(tool.id, { users: e.target.value === "" ? 0 : n >= staff ? null : Math.max(1, n) });
+                        }}
+                        onBlur={() => tool.users === 0 && update(tool.id, { users: null })}
+                        className={numberInput}
+                      />
+                      <span className="text-graphite">{Math.min(staff, tool.users ?? staff) === 1 ? "person" : "people"}</span>
+                    </div>
+                  ) : null}
                 </li>
               );
             })}
@@ -197,7 +248,7 @@ export function Calculator() {
                 <span className="ml-1.5 text-[17px] font-medium tracking-normal text-night-text">a year</span>
               </dd>
               <dd className="mt-1 text-[14px] text-night-text">
-                {result.toolCount} {result.toolCount === 1 ? "tool" : "tools"} · {formatGBP(result.perUserMonthly)} per person, per month
+                {result.toolCount} {result.toolCount === 1 ? "tool" : "tools"} · {formatGBP(result.currentMonthly)} a month
               </dd>
             </div>
 
@@ -210,42 +261,47 @@ export function Calculator() {
                     <span className="ml-1.5 text-[17px] font-medium tracking-normal text-night-text">in year one</span>
                   </dd>
                   <dd className="mt-1 text-[14px] text-night-text">
-                    {plan.name} plan, up to {plan.users} people · {formatGBP(plan.setupFee)} setup, then{" "}
-                    {formatGBP(result.thapsusAnnualAfter)} a year
+                    {plan.name} plan, up to {plan.users} people · {formatGBP(startFee)} to start, then {formatGBP(plan.monthlyFee)} a
+                    month
                   </dd>
                 </>
               ) : (
                 <>
                   <dd className="mt-1 text-[32px] font-bold tracking-[-0.03em] md:text-[36px]">Custom quote</dd>
                   <dd className="mt-1 text-[14px] text-night-text">
-                    For teams over {largestPlanUsers} people, we’ll price a plan around what you need.
+                    {customReason}
                   </dd>
                 </>
               )}
             </div>
           </dl>
 
-          {plan ? (
+          {noTools ? (
+            <p className="mt-7 border-t border-white/15 pt-7 text-[15px] leading-[1.5] text-night-text">
+              Tick the tools you pay for to see an estimate.
+            </p>
+          ) : plan ? (
             <dl className="mt-7 grid grid-cols-2 gap-4 border-t border-white/15 pt-7">
               <div>
-                <dt className="text-[15px] text-night-text">Saving in year one</dt>
+                <dt className="text-[15px] text-night-text">{costsMoreYearOne ? "Extra cost in year one" : "Saving in year one"}</dt>
                 <dd className="mt-1 text-[24px] font-bold tracking-[-0.02em]">
-                  <AnimatedNumber value={result.savingYearOne} />
+                  <AnimatedNumber value={Math.abs(result.savingYearOne)} />
                 </dd>
               </div>
               <div>
-                <dt className="text-[15px] text-night-text">Saving over three years</dt>
-                <dd className="mt-1 text-[32px] font-bold leading-none tracking-[-0.03em] text-accent-on-dark md:text-[40px]">
-                  <AnimatedNumber value={result.saving3Years} />
+                <dt className="text-[15px] text-night-text">{costsMore3Years ? "Extra cost over three years" : "Saving over three years"}</dt>
+                <dd
+                  className={`mt-1 text-[32px] font-bold leading-none tracking-[-0.03em] md:text-[40px] ${costsMore3Years ? "" : "text-accent-on-dark"}`}
+                >
+                  <AnimatedNumber value={Math.abs(result.saving3Years)} />
                 </dd>
               </div>
             </dl>
           ) : null}
 
-          {negativeYearOne ? (
+          {costNote && !noTools ? (
             <p className="mt-5 text-[14px] leading-[1.5] text-night-text">
-              On these figures, your current tools cost less in year one because of the setup fee. We’ll always tell you honestly
-              whether replacing something is worth it.
+              {costNote} We’ll always tell you honestly whether replacing something is worth it.
             </p>
           ) : null}
 
@@ -257,7 +313,8 @@ export function Calculator() {
             Get an exact figure — book a free review
           </ButtonLink>
           <p className="mt-5 text-[13px] leading-[1.5] text-night-text">
-            Estimates only, based on the figures you entered{site.calculator.includeSetupFee ? " and including the one-off setup fee" : ""}.
+            Estimates only, based on the figures you entered. All figures exclude VAT
+            {includeStartFee ? `, and Thapsus figures include the ${formatGBP(startFee)} start fee` : ""}.
             {site.pricing.isPlaceholder ? " Thapsus prices shown are samples until our pricing is published." : ""} Your free review gives
             you an exact quote. Nothing you enter here is sent to us.
           </p>

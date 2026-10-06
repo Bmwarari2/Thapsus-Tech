@@ -1,7 +1,7 @@
 import { Calculator } from "@/components/calculator/Calculator";
 import { CountUp } from "@/components/ui/Numbers";
 import { site } from "@/config/site";
-import { defaultEstimate } from "@/lib/savings";
+import { defaultEstimate, formatGBP } from "@/lib/savings";
 
 export function Savings({ showExample = true }: { showExample?: boolean }) {
   const example = defaultEstimate();
@@ -54,7 +54,7 @@ export function Savings({ showExample = true }: { showExample?: boolean }) {
               </div>
             </dl>
             <p className="t-caption mx-auto mt-6 max-w-[40em] text-center text-graphite">
-              Estimate only. Includes the one-off setup fee. Try your own numbers below.
+              Estimate only. Includes the {formatGBP(site.pricing.startFee)} start fee. All figures exclude VAT. Try your own numbers below.
             </p>
           </div>
         ) : null}

@@ -31,7 +31,7 @@ export const steps: Step[] = [
     title: "Proposal & fixed quote",
     summary: "A clear plan and a fixed price, so you know exactly what you’re getting before anything starts.",
     you: "Read the proposal, ask questions and decide what matters most.",
-    we: "Write a clear scope, sketch the key screens and set a fixed setup fee and monthly fee.",
+    we: "Write a clear scope, sketch the key screens and fix your monthly fee.",
     get: "A fixed price, in writing. No surprise invoices.",
   },
   {

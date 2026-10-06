@@ -71,66 +71,76 @@ export const site = {
   },
 
   /**
-   * Pricing. While `isPlaceholder` is true, the site shows clearly marked
-   * placeholder prices and labels the calculator as using sample figures.
-   * Set it to false once the numbers below are real.
+   * Pricing. All prices exclude VAT. While `isPlaceholder` is true, the site
+   * shows "£[X]" instead of the numbers below and labels the calculator as
+   * using sample figures.
    */
   pricing: {
-    isPlaceholder: true,
+    isPlaceholder: false,
+    /** Paid when the client signs their proposal (Starter and Growth). */
+    startFee: 200,
+    /** Monthly fees start at go-live and run for at least this many months. */
+    minimumTermMonths: 12,
+    /** Discount on the monthly fee for charities and churches. 0 hides the line. */
+    charityDiscountPercent: 10,
     plans: [
       {
         id: "starter",
         name: "Starter",
         summary: "One focused tool for a small team.",
-        setupFee: 3000,
-        monthlyFee: 250,
+        monthlyFee: 249,
         users: 10,
+        /** The most subscriptions the savings calculator lets this plan replace. */
+        replacesUpTo: 2,
         supportHours: "working hours, 24/7 for emergencies",
-        features: ["One core tool", "Hosting, backups and security updates", "Email support", "Small improvements each month"],
+        features: ["One core tool", "1 hour of improvements a month", "Hosting, backups and security updates", "Email support"],
       },
       {
         id: "growth",
         name: "Growth",
         summary: "Several connected tools, one system.",
-        setupFee: 6000,
-        monthlyFee: 450,
+        monthlyFee: 495,
         users: 30,
+        replacesUpTo: 5,
         supportHours: "working hours, 24/7 for emergencies",
-        features: ["Up to [X] connected tools", "Hosting, backups and security updates", "Priority phone and email support", "Monthly improvement time"],
+        features: ["Up to 5 connected tools", "3 hours of improvements a month", "Hosting, backups and security updates", "Priority phone and email support"],
       },
       {
         id: "custom",
         name: "Custom",
         summary: "Larger teams and bigger systems, including ERP.",
-        setupFee: null,
         monthlyFee: null,
         users: null,
+        replacesUpTo: null,
         supportHours: "Agreed with you",
-        features: ["Unlimited scope, quoted to fit", "Dedicated support arrangement", "Data migration from multiple systems", "Code handover option"],
+        features: ["Unlimited scope, quoted to fit", "Setup paid in stages", "Dedicated support arrangement", "Data migration from multiple systems", "Code handover option"],
       },
     ],
   },
 
   /**
-   * Savings calculator. Tool prices are per user, per month, and are examples
-   * that visitors can edit. The Thapsus cost uses the cheapest plan above that
-   * covers the number of staff entered.
+   * Savings calculator. Tool prices are monthly examples, excluding VAT, that
+   * visitors can edit. `unit: "user"` is per person (and visitors can say how
+   * many people use it); `unit: "flat"` is one price for the whole account.
+   * The Thapsus cost uses the cheapest plan above that covers both the team
+   * size and the number of tools ticked.
    */
   calculator: {
     defaultStaff: 20,
     minStaff: 1,
     maxStaff: 200,
-    /** Spread the one-off setup fee into the year-one and three-year figures. */
-    includeSetupFee: true,
+    /** Include the start fee in the year-one and three-year figures. */
+    includeStartFee: true,
     tools: [
-      { id: "crm", name: "CRM & sales pipeline", pricePerUser: 25, selected: true },
-      { id: "projects", name: "Project & task boards", pricePerUser: 12, selected: true },
-      { id: "helpdesk", name: "Helpdesk & ticketing", pricePerUser: 30, selected: false },
-      { id: "booking", name: "Booking & scheduling", pricePerUser: 12, selected: true },
-      { id: "forms", name: "Forms & approvals", pricePerUser: 10, selected: false },
-      { id: "hr", name: "HR, leave & rotas", pricePerUser: 6, selected: true },
-      { id: "portal", name: "Client portal", pricePerUser: 15, selected: false },
-      { id: "inventory", name: "Stock & inventory", pricePerUser: 20, selected: false },
+      { id: "crm", name: "CRM & sales pipeline", price: 25, unit: "user", selected: true },
+      { id: "projects", name: "Project & task boards", price: 10, unit: "user", selected: true },
+      { id: "booking", name: "Booking & scheduling", price: 8, unit: "user", selected: true },
+      { id: "hr", name: "HR, leave & rotas", price: 6, unit: "user", selected: true },
+      { id: "jobs", name: "Job management", price: 37, unit: "user", selected: false },
+      { id: "helpdesk", name: "Helpdesk & ticketing", price: 30, unit: "user", selected: false },
+      { id: "forms", name: "Forms & approvals", price: 30, unit: "flat", selected: false },
+      { id: "portal", name: "Client portal", price: 40, unit: "flat", selected: false },
+      { id: "inventory", name: "Stock & inventory", price: 60, unit: "flat", selected: false },
     ],
   },
 } as const;
